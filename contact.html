@@ -2,191 +2,246 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" href="https://fav.farm/🖥️" />
+  <link rel="icon" href="https://fav.farm/☕" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>OOP E-Portfolio | Contact</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0d0d0d;
-      --surface: #141414;
-      --surface2: #1a1a1a;
-      --border: #222;
-      --accent: #c8f135;
-      --accent2: #3b82f6;
-      --text: #f0f0f0;
-      --muted: #666;
-      --mono: 'Space Mono', monospace;
-      --sans: 'Syne', sans-serif;
+      --gold: #FFD700;
+      --gold2: #FFA500;
+      --ink: #0a0608;
+      --purple: #2D0A4E;
+      --magenta: #C8005A;
+      --cream: #FFF8E7;
+      --red: #CC1122;
+      --blue: #0044AA;
+      --mono: 'Share Tech Mono', monospace;
+      --display: 'Bebas Neue', cursive;
+      --body: 'Noto Sans JP', sans-serif;
     }
 
     html { scroll-behavior: smooth; }
-
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--sans);
+      background: var(--ink);
+      color: var(--cream);
+      font-family: var(--body);
       min-height: 100vh;
       overflow-x: hidden;
     }
 
-    /* ── NAV ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,215,0,0.05) 1px, transparent 1px);
+      background-size: 20px 20px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ═══ NAV ═══ */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 100;
+      z-index: 1000;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.2rem 3rem;
-      background: rgba(13,13,13,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 64px;
+      background: var(--ink);
+      border-bottom: 4px solid var(--gold);
+      box-shadow: 0 4px 0 var(--gold2);
     }
 
     .nav-logo {
-      font-family: var(--mono);
-      font-size: 0.85rem;
-      color: var(--accent);
-      letter-spacing: 0.05em;
+      font-family: var(--display);
+      font-size: 1.6rem;
+      color: var(--gold);
       text-decoration: none;
+      letter-spacing: 0.1em;
+      text-shadow: 3px 3px 0 var(--magenta), 6px 6px 0 var(--purple);
     }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
+    .nav-logo::before {
+      content: '★';
+      color: var(--gold2);
+      margin-right: 0.4rem;
+      animation: spin-star 4s linear infinite;
+      display: inline-block;
     }
-
+    .nav-links { display: flex; gap: 0; list-style: none; }
     .nav-links a {
-      font-family: var(--mono);
-      font-size: 0.78rem;
-      color: var(--muted);
+      font-family: var(--display);
+      font-size: 1rem;
+      color: var(--cream);
       text-decoration: none;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: color 0.2s;
+      letter-spacing: 0.1em;
+      padding: 0 1.4rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      border-left: 2px solid rgba(255,215,0,0.2);
+      transition: all 0.15s;
       position: relative;
+      overflow: hidden;
     }
-
-    .nav-links a::after {
+    .nav-links a::before {
       content: '';
       position: absolute;
-      bottom: -4px; left: 0;
-      width: 0; height: 1px;
-      background: var(--accent);
-      transition: width 0.25s;
+      bottom: 0; left: 0; right: 0;
+      height: 0;
+      background: var(--gold);
+      transition: height 0.15s;
     }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a:hover::before { height: 100%; }
+    .nav-links a span { position: relative; z-index: 1; }
+    .nav-links a.active { background: var(--gold); color: var(--ink); }
 
-    .nav-links a:hover { color: var(--accent); }
-    .nav-links a:hover::after { width: 100%; }
-    .nav-links a.active { color: var(--accent); }
-    .nav-links a.active::after { width: 100%; }
-
-    /* ── MAIN LAYOUT ── */
+    /* ═══ MAIN LAYOUT ═══ */
     .contact-wrapper {
       min-height: 100vh;
       display: grid;
       grid-template-columns: 1fr 1fr;
+      padding-top: 64px;
+      position: relative;
+      z-index: 5;
     }
 
-    /* ── LEFT PANEL ── */
+    /* diagonal gold divider */
+    .contact-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 50%;
+      width: 60px;
+      background: var(--gold);
+      transform: skewX(-4deg) translateX(-50%);
+      z-index: 2;
+    }
+
+    /* ═══ LEFT PANEL ═══ */
     .left-panel {
-      padding: 10rem 4rem 4rem;
-      border-right: 1px solid var(--border);
+      background: var(--purple);
+      padding: 6rem 4rem 4rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
       position: relative;
       overflow: hidden;
+      z-index: 3;
     }
 
     .left-panel::before {
-      content: 'HI.';
+      content: 'YA\A RE!\A KU ZU';
+      white-space: pre;
       position: absolute;
-      bottom: -2rem;
-      left: -1rem;
-      font-size: 18rem;
-      font-weight: 800;
-      color: rgba(200,241,53,0.03);
+      bottom: -4rem;
+      left: -2rem;
+      font-family: var(--display);
+      font-size: 14rem;
+      line-height: 0.85;
+      color: rgba(255,215,0,0.04);
       letter-spacing: -0.05em;
       pointer-events: none;
-      line-height: 1;
+    }
+
+    .left-panel::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        90deg,
+        rgba(255,215,0,0.03) 0px,
+        rgba(255,215,0,0.03) 2px,
+        transparent 2px,
+        transparent 50px
+      );
+      pointer-events: none;
     }
 
     .breadcrumb {
       font-family: var(--mono);
       font-size: 0.72rem;
-      color: var(--muted);
-      letter-spacing: 0.1em;
+      color: rgba(255,248,231,0.4);
+      letter-spacing: 0.15em;
       margin-bottom: 1.5rem;
       opacity: 0;
-      animation: fadeUp 0.5s 0.1s forwards;
+      animation: jojo-in 0.5s 0.1s forwards;
+      position: relative; z-index: 1;
     }
-
-    .breadcrumb span { color: var(--accent); }
+    .breadcrumb span { color: var(--gold); }
 
     .left-panel h1 {
-      font-size: clamp(2.5rem, 4vw, 4.5rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 1.05;
+      font-family: var(--display);
+      font-size: clamp(3rem, 5vw, 5.5rem);
+      letter-spacing: 0.06em;
+      line-height: 1;
+      color: var(--cream);
+      text-shadow: 5px 5px 0 var(--magenta), 10px 10px 0 rgba(0,0,0,0.5);
       margin-bottom: 1.5rem;
       opacity: 0;
-      animation: fadeUp 0.5s 0.25s forwards;
+      animation: jojo-in 0.5s 0.25s forwards;
+      position: relative; z-index: 1;
     }
 
     .left-panel h1 em {
-      color: var(--accent);
+      color: var(--gold);
       font-style: normal;
+      text-shadow: 5px 5px 0 var(--red), 10px 10px 0 rgba(0,0,0,0.6);
+      display: block;
     }
 
     .left-panel p {
       font-family: var(--mono);
       font-size: 0.82rem;
-      color: var(--muted);
+      color: rgba(255,248,231,0.55);
       line-height: 1.8;
-      max-width: 400px;
+      max-width: 380px;
+      border-left: 4px solid var(--gold);
+      padding-left: 1rem;
       opacity: 0;
-      animation: fadeUp 0.5s 0.4s forwards;
+      animation: jojo-in 0.5s 0.4s forwards;
+      position: relative; z-index: 1;
     }
 
-    /* ── RIGHT PANEL ── */
+    /* ═══ RIGHT PANEL ═══ */
     .right-panel {
-      padding: 10rem 4rem 4rem;
+      background: var(--ink);
+      padding: 6rem 4rem 4rem 5rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      gap: 1.5rem;
+      gap: 1.2rem;
+      position: relative;
+      z-index: 3;
     }
 
-    .contact-label {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      color: var(--accent);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 0.5rem;
+    .contact-section-label {
+      font-family: var(--display);
+      font-size: 0.85rem;
+      letter-spacing: 0.25em;
+      color: var(--gold2);
       opacity: 0;
-      animation: fadeUp 0.5s 0.3s forwards;
+      animation: jojo-in 0.5s 0.3s forwards;
     }
 
-    /* ── CONTACT CARDS ── */
+    /* ═══ CONTACT CARD ═══ */
     .contact-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
+      border: 3px solid var(--gold);
+      background: var(--ink);
       padding: 1.8rem 2rem;
       display: flex;
       align-items: center;
       gap: 1.5rem;
       text-decoration: none;
-      color: var(--text);
-      transition: border-color 0.2s, transform 0.2s, background 0.2s;
+      color: var(--cream);
+      transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
       opacity: 0;
-      animation: fadeUp 0.5s forwards;
+      animation: jojo-in 0.5s forwards;
       position: relative;
       overflow: hidden;
     }
@@ -197,148 +252,139 @@
     .contact-card::before {
       content: '';
       position: absolute;
-      inset: 0;
-      background: rgba(200,241,53,0.03);
-      opacity: 0;
-      transition: opacity 0.2s;
+      top: 0; right: 0;
+      border-left: 24px solid transparent;
+      border-top: 24px solid var(--gold);
     }
 
     .contact-card:hover {
-      border-color: #333;
-      transform: translateX(6px);
+      transform: translate(-4px, -4px);
+      box-shadow: 8px 8px 0 var(--gold);
+      background: rgba(255,215,0,0.04);
     }
 
-    .contact-card:hover::before { opacity: 1; }
-
     .contact-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 10px;
+      width: 56px;
+      height: 56px;
+      border: 3px solid var(--gold);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.4rem;
+      font-size: 1.5rem;
       flex-shrink: 0;
+      position: relative;
+      z-index: 1;
     }
 
-    .icon-email { background: rgba(200,241,53,0.1); }
-    .icon-fb    { background: rgba(59,130,246,0.15); }
-
-    .contact-info { flex: 1; }
+    .contact-info { flex: 1; position: relative; z-index: 1; }
 
     .contact-type {
-      font-family: var(--mono);
-      font-size: 0.62rem;
-      color: var(--muted);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      font-family: var(--display);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--gold2);
       margin-bottom: 0.3rem;
     }
 
     .contact-value {
       font-family: var(--mono);
       font-size: 0.88rem;
-      color: var(--text);
+      color: var(--cream);
       word-break: break-all;
     }
 
     .contact-arrow {
-      font-size: 1rem;
-      color: var(--muted);
-      transition: color 0.2s, transform 0.2s;
+      font-family: var(--display);
+      font-size: 1.5rem;
+      color: var(--gold);
       flex-shrink: 0;
+      transition: transform 0.2s;
+      position: relative; z-index: 1;
     }
 
-    .contact-card:hover .contact-arrow {
-      color: var(--accent);
-      transform: translate(3px, -3px);
-    }
+    .contact-card:hover .contact-arrow { transform: translate(4px, -4px); }
 
-    /* ── DIVIDER ── */
+    /* divider */
     .divider {
       display: flex;
       align-items: center;
       gap: 1rem;
       opacity: 0;
-      animation: fadeUp 0.5s 0.5s forwards;
+      animation: jojo-in 0.5s 0.55s forwards;
     }
 
-    .divider .line {
+    .divider .dline {
       flex: 1;
-      height: 1px;
-      background: var(--border);
+      height: 2px;
+      background: rgba(255,215,0,0.3);
     }
 
     .divider span {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      color: var(--muted);
-      letter-spacing: 0.1em;
+      font-family: var(--display);
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      color: rgba(255,215,0,0.4);
     }
 
-    /* ── BACK HOME ── */
+    /* back home */
     .back-home {
       display: inline-flex;
       align-items: center;
       gap: 0.6rem;
-      font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--muted);
+      font-family: var(--display);
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      color: rgba(255,215,0,0.5);
       text-decoration: none;
-      letter-spacing: 0.08em;
       transition: color 0.2s;
       opacity: 0;
-      animation: fadeUp 0.5s 0.7s forwards;
-      margin-top: 0.5rem;
+      animation: jojo-in 0.5s 0.7s forwards;
     }
 
-    .back-home:hover { color: var(--accent); }
+    .back-home:hover { color: var(--gold); }
 
-    /* ── FOOTER ── */
+    /* ═══ FOOTER ═══ */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem 3rem;
+      background: var(--purple);
+      border-top: 6px solid var(--gold);
+      padding: 2rem 4rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: relative;
+      z-index: 10;
     }
 
-    footer p {
+    .footer-brand {
+      font-family: var(--display);
+      font-size: 1.2rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-shadow: 2px 2px 0 var(--magenta);
+    }
+
+    .footer-meta {
       font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--muted);
+      font-size: 0.68rem;
+      color: rgba(255,248,231,0.5);
     }
 
-    footer .dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      animation: pulse 2s infinite;
+    .footer-stars { color: var(--gold); font-size: 1rem; letter-spacing: 0.3em; }
+
+    @keyframes jojo-in {
+      from { opacity: 0; transform: translateX(-30px) skewX(-5deg); }
+      to   { opacity: 1; transform: translateX(0) skewX(0); }
     }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
+    @keyframes spin-star {
+      to { transform: rotate(360deg); }
     }
 
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-
-    /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
-      .contact-wrapper {
-        grid-template-columns: 1fr;
-      }
-      .left-panel {
-        border-right: none;
-        border-bottom: 1px solid var(--border);
-        padding: 8rem 2rem 3rem;
-      }
-      .right-panel {
-        padding: 3rem 2rem 4rem;
-      }
+      .contact-wrapper { grid-template-columns: 1fr; }
+      .contact-wrapper::after { display: none; }
+      .left-panel { border-bottom: 6px solid var(--gold); }
+      .right-panel { padding: 3rem 2rem 4rem; }
     }
   </style>
 </head>
@@ -346,37 +392,34 @@
 
   <!-- ══ NAV ══ -->
   <nav>
-    <a href="index.html" class="nav-logo">./e-portfolio</a>
+    <a href="index.html" class="nav-logo">ALIDRO</a>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="midterm.html">Midterm</a></li>
-      <li><a href="final.html">Outputs</a></li>
-      <li><a href="contact.html" class="active">Contact</a></li>
+      <li><a href="index.html"><span>Home</span></a></li>
+      <li><a href="midterm.html"><span>Midterm</span></a></li>
+      <li><a href="final.html"><span>Outputs</span></a></li>
+      <li><a href="contact.html" class="active"><span>Contact</span></a></li>
     </ul>
   </nav>
 
-  <!-- ══ CONTACT LAYOUT ══ -->
+  <!-- ══ MAIN LAYOUT ══ -->
   <div class="contact-wrapper">
 
     <!-- LEFT -->
     <div class="left-panel">
-      <p class="breadcrumb">
-        <span>Daryl Alidro</span> &nbsp;/&nbsp; BSIT 2-3 &nbsp;/&nbsp; Contact
-      </p>
+      <p class="breadcrumb"><span>Daryl Alidro</span> &nbsp;◆&nbsp; BSIT 2-3 &nbsp;◆&nbsp; Contact</p>
       <h1>Get in <em>Touch.</em></h1>
       <p>Feel free to reach out via email or connect with me on Facebook. I'm open to questions, feedback, or just a quick hello.</p>
     </div>
 
     <!-- RIGHT -->
     <div class="right-panel">
-
-      <p class="contact-label">// Reach me at</p>
+      <p class="contact-section-label">◆ REACH ME AT ◆</p>
 
       <!-- EMAIL -->
       <a href="mailto:alidrodaryl8@gmail.com" class="contact-card">
-        <div class="contact-icon icon-email">✉️</div>
+        <div class="contact-icon">✉️</div>
         <div class="contact-info">
-          <div class="contact-type">Email</div>
+          <div class="contact-type">Email Address</div>
           <div class="contact-value">alidrodaryl8@gmail.com</div>
         </div>
         <span class="contact-arrow">↗</span>
@@ -384,7 +427,7 @@
 
       <!-- FACEBOOK -->
       <a href="https://www.facebook.com/Ryll.39" target="_blank" rel="noopener" class="contact-card">
-        <div class="contact-icon icon-fb">👤</div>
+        <div class="contact-icon">👤</div>
         <div class="contact-info">
           <div class="contact-type">Facebook</div>
           <div class="contact-value">facebook.com/Ryll.39</div>
@@ -393,20 +436,21 @@
       </a>
 
       <div class="divider">
-        <div class="line"></div>
-        <span>or</span>
-        <div class="line"></div>
+        <div class="dline"></div>
+        <span>◆ OR ◆</span>
+        <div class="dline"></div>
       </div>
 
-      <a href="index.html" class="back-home">← Back to Home</a>
-
+      <a href="index.html" class="back-home">◀ BACK TO HOME</a>
     </div>
+
   </div>
 
   <!-- ══ FOOTER ══ -->
   <footer>
-    <p>&copy; 2025 &mdash; Daryl Alidro &mdash; OOP E-Portfolio</p>
-    <div class="dot"></div>
+    <div class="footer-brand">★ DARYL ALIDRO ★</div>
+    <div class="footer-meta">&copy; 2025 — OOP E-PORTFOLIO — BSIT 2-3</div>
+    <div class="footer-stars">◆ ◆ ◆</div>
   </footer>
 
 </body>
