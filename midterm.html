@@ -2,266 +2,313 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" href="https://fav.farm/🖥️" />
+  <link rel="icon" href="https://fav.farm/☕" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>OOP E-Portfolio | Midterm</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0d0d0d;
-      --surface: #141414;
-      --surface2: #1a1a1a;
-      --border: #222;
-      --accent: #c8f135;
-      --accent2: #3b82f6;
-      --text: #f0f0f0;
-      --muted: #666;
-      --mono: 'Space Mono', monospace;
-      --sans: 'Syne', sans-serif;
+      --gold: #FFD700;
+      --gold2: #FFA500;
+      --ink: #0a0608;
+      --purple: #2D0A4E;
+      --magenta: #C8005A;
+      --cream: #FFF8E7;
+      --red: #CC1122;
+      --blue: #0044AA;
+      --mono: 'Share Tech Mono', monospace;
+      --display: 'Bebas Neue', cursive;
+      --body: 'Noto Sans JP', sans-serif;
     }
 
     html { scroll-behavior: smooth; }
-
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--sans);
+      background: var(--ink);
+      color: var(--cream);
+      font-family: var(--body);
       min-height: 100vh;
       overflow-x: hidden;
     }
 
-    /* ── NAV ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,215,0,0.05) 1px, transparent 1px);
+      background-size: 20px 20px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ═══ NAV ═══ */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 100;
+      z-index: 1000;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.2rem 3rem;
-      background: rgba(13,13,13,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 64px;
+      background: var(--ink);
+      border-bottom: 4px solid var(--gold);
+      box-shadow: 0 4px 0 var(--gold2);
     }
 
     .nav-logo {
-      font-family: var(--mono);
-      font-size: 0.85rem;
-      color: var(--accent);
-      letter-spacing: 0.05em;
+      font-family: var(--display);
+      font-size: 1.6rem;
+      color: var(--gold);
       text-decoration: none;
+      letter-spacing: 0.1em;
+      text-shadow: 3px 3px 0 var(--magenta), 6px 6px 0 var(--purple);
     }
 
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
+    .nav-logo::before {
+      content: '★';
+      color: var(--gold2);
+      margin-right: 0.4rem;
+      animation: spin-star 4s linear infinite;
+      display: inline-block;
     }
+
+    .nav-links { display: flex; gap: 0; list-style: none; }
 
     .nav-links a {
-      font-family: var(--mono);
-      font-size: 0.78rem;
-      color: var(--muted);
+      font-family: var(--display);
+      font-size: 1rem;
+      color: var(--cream);
       text-decoration: none;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-      position: relative;
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px; left: 0;
-      width: 0; height: 1px;
-      background: var(--accent);
-      transition: width 0.25s;
-    }
-
-    .nav-links a:hover { color: var(--accent); }
-    .nav-links a:hover::after { width: 100%; }
-    .nav-links a.active { color: var(--accent); }
-    .nav-links a.active::after { width: 100%; }
-
-    /* ── PAGE HEADER ── */
-    .page-header {
-      padding: 8rem 3rem 4rem;
-      border-bottom: 1px solid var(--border);
+      letter-spacing: 0.1em;
+      padding: 0 1.4rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      border-left: 2px solid rgba(255,215,0,0.2);
+      transition: all 0.15s;
       position: relative;
       overflow: hidden;
+    }
+
+    .nav-links a::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 0;
+      background: var(--gold);
+      transition: height 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a:hover::before { height: 100%; }
+    .nav-links a span { position: relative; z-index: 1; }
+    .nav-links a.active { background: var(--gold); color: var(--ink); }
+
+    /* ═══ PAGE HEADER ═══ */
+    .page-header {
+      padding: 8rem 4rem 4rem;
+      background: var(--purple);
+      position: relative;
+      overflow: hidden;
+      border-bottom: 6px solid var(--gold);
     }
 
     .page-header::before {
       content: 'MIDTERM';
       position: absolute;
-      top: 50%; right: -1rem;
-      transform: translateY(-50%);
-      font-size: 12rem;
-      font-weight: 800;
-      color: rgba(200,241,53,0.03);
+      bottom: -3rem; right: -2rem;
+      font-family: var(--display);
+      font-size: 18rem;
+      color: rgba(255,215,0,0.05);
       letter-spacing: -0.05em;
       pointer-events: none;
-      white-space: nowrap;
+      line-height: 1;
+    }
+
+    /* diagonal accent */
+    .page-header::after {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      width: 300px; height: 100%;
+      background: rgba(255,215,0,0.04);
+      transform: skewX(-8deg) translateX(50px);
     }
 
     .breadcrumb {
       font-family: var(--mono);
       font-size: 0.72rem;
-      color: var(--muted);
-      letter-spacing: 0.1em;
+      color: rgba(255,248,231,0.5);
+      letter-spacing: 0.15em;
       margin-bottom: 1rem;
       opacity: 0;
-      animation: fadeUp 0.5s 0.1s forwards;
+      animation: jojo-in 0.5s 0.1s forwards;
     }
 
-    .breadcrumb span { color: var(--accent); }
+    .breadcrumb span { color: var(--gold); }
 
     .page-header h1 {
-      font-size: clamp(2.5rem, 6vw, 5rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
+      font-family: var(--display);
+      font-size: clamp(3rem, 8vw, 7rem);
+      letter-spacing: 0.06em;
       line-height: 1;
-      margin-bottom: 1rem;
+      color: var(--cream);
+      text-shadow: 5px 5px 0 var(--magenta), 10px 10px 0 rgba(0,0,0,0.4);
+      margin-bottom: 0.5rem;
       opacity: 0;
-      animation: fadeUp 0.5s 0.25s forwards;
+      animation: jojo-in 0.5s 0.25s forwards;
+      position: relative;
+      z-index: 1;
     }
 
     .page-header h1 em {
-      color: var(--accent);
+      color: var(--gold);
       font-style: normal;
+      text-shadow: 5px 5px 0 var(--red), 10px 10px 0 rgba(0,0,0,0.5);
     }
 
     .page-header p {
       font-family: var(--mono);
       font-size: 0.82rem;
-      color: var(--muted);
-      max-width: 560px;
+      color: rgba(255,248,231,0.6);
       line-height: 1.7;
+      max-width: 560px;
       opacity: 0;
-      animation: fadeUp 0.5s 0.4s forwards;
+      animation: jojo-in 0.5s 0.4s forwards;
+      position: relative;
+      z-index: 1;
     }
 
-    /* ── JUMP LINKS ── */
+    /* ═══ JUMP NAV ═══ */
     .jump-nav {
-      padding: 1.5rem 3rem;
-      border-bottom: 1px solid var(--border);
       display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-      background: var(--surface);
+      gap: 0;
+      background: var(--gold);
+      border-bottom: 4px solid var(--ink);
+      position: relative;
+      z-index: 5;
     }
 
     .jump-link {
-      font-family: var(--mono);
-      font-size: 0.7rem;
-      color: var(--muted);
+      font-family: var(--display);
+      font-size: 1rem;
+      color: var(--ink);
       text-decoration: none;
-      border: 1px solid var(--border);
-      border-radius: 99px;
-      padding: 0.35rem 0.9rem;
-      letter-spacing: 0.06em;
-      transition: all 0.2s;
+      letter-spacing: 0.12em;
+      padding: 0.9rem 2rem;
+      border-right: 3px solid var(--ink);
+      transition: background 0.15s, color 0.15s;
     }
 
     .jump-link:hover {
-      color: var(--accent);
-      border-color: var(--accent);
-      background: rgba(200,241,53,0.05);
+      background: var(--ink);
+      color: var(--gold);
     }
 
-    /* ── MAIN CONTENT ── */
-    main { padding: 4rem 3rem; }
-
-    /* ── SECTION BLOCK ── */
-    .content-section {
-      margin-bottom: 5rem;
+    /* ═══ MAIN ═══ */
+    main {
+      padding: 4rem 4rem;
+      position: relative;
+      z-index: 5;
     }
 
+    /* ═══ CONTENT SECTION ═══ */
+    .content-section { margin-bottom: 6rem; }
+
+    /* Section heading — manga chapter style */
     .section-heading {
       display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 2rem;
-      padding-bottom: 1rem;
-      border-bottom: 1px solid var(--border);
+      align-items: stretch;
+      margin-bottom: 2.5rem;
+      border: 3px solid var(--gold);
+      overflow: hidden;
     }
 
     .section-tag {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      color: var(--bg);
-      background: var(--accent);
-      padding: 0.2rem 0.6rem;
-      border-radius: 4px;
-      letter-spacing: 0.08em;
-      font-weight: 700;
-      text-transform: uppercase;
+      font-family: var(--display);
+      font-size: 1.1rem;
+      letter-spacing: 0.15em;
+      background: var(--gold);
+      color: var(--ink);
+      padding: 0.6rem 1.5rem;
+      display: flex;
+      align-items: center;
       flex-shrink: 0;
     }
 
-    .section-tag.blue {
-      background: var(--accent2);
-    }
+    .section-tag.blue { background: var(--blue); color: var(--cream); }
+    .section-tag.red  { background: var(--red);  color: var(--cream); }
 
     .section-heading h2 {
-      font-size: 1.4rem;
-      font-weight: 800;
+      font-family: var(--display);
+      font-size: 1.5rem;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      padding: 0.6rem 1.5rem;
+      display: flex;
+      align-items: center;
     }
 
-    .section-heading .line {
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    /* ── ITEM CARDS ── */
+    /* ═══ ITEMS GRID ═══ */
     .items-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.2rem;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
     }
 
+    /* ═══ ITEM CARD ═══ */
     .item-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
+      border: 3px solid var(--gold);
+      background: var(--ink);
+      position: relative;
       overflow: hidden;
-      transition: border-color 0.2s, transform 0.2s;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
     .item-card:hover {
-      border-color: #333;
-      transform: translateY(-2px);
+      transform: translate(-4px, -4px);
+      box-shadow: 8px 8px 0 var(--gold);
+    }
+
+    .item-card::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      border-left: 30px solid transparent;
+      border-top: 30px solid var(--gold);
     }
 
     .item-card-header {
-      padding: 1.2rem 1.4rem;
-      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.4rem;
+      border-bottom: 2px solid var(--gold);
       display: flex;
       align-items: center;
       justify-content: space-between;
+      background: rgba(255,215,0,0.05);
     }
 
     .item-number {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      color: var(--accent);
-      letter-spacing: 0.1em;
+      font-family: var(--display);
+      font-size: 0.9rem;
+      color: var(--gold);
+      letter-spacing: 0.12em;
     }
 
     .item-card-header h3 {
-      font-size: 0.95rem;
-      font-weight: 600;
+      font-family: var(--display);
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      color: var(--cream);
     }
 
-    /* ── SCREENSHOT BOX ── */
+    /* Screenshot area */
     .screenshot-box {
       width: 100%;
       aspect-ratio: 16/9;
-      background: var(--surface2);
-      border-bottom: 1px solid var(--border);
+      background: #111;
+      border-bottom: 2px solid var(--gold);
       overflow: hidden;
       position: relative;
     }
@@ -271,188 +318,180 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      transition: transform 0.4s;
+      filter: contrast(1.05) saturate(1.1);
     }
 
-    /* ── PAPER NOTE BOX ── */
+    .item-card:hover .screenshot-box img { transform: scale(1.05); }
+
+    /* Paper note */
     .paper-note-box {
       width: 100%;
       aspect-ratio: 16/9;
-      background: var(--surface2);
-      border-bottom: 1px solid var(--border);
+      border-bottom: 2px solid var(--gold);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 0.6rem;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .paper-note-box::before {
-      content: '';
-      position: absolute;
-      inset: 0;
+      gap: 0.5rem;
       background: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 10px,
-        rgba(255,255,255,0.01) 10px,
-        rgba(255,255,255,0.01) 20px
+        -45deg, #111, #111 10px, #131313 10px, #131313 20px
       );
     }
 
-    .paper-note-icon {
-      font-size: 2rem;
-      position: relative;
-      z-index: 1;
-    }
+    .paper-note-icon { font-size: 2rem; }
 
     .paper-note-label {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      color: var(--accent);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      position: relative;
-      z-index: 1;
+      font-family: var(--display);
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
     }
 
     .paper-note-sub {
       font-family: var(--mono);
-      font-size: 0.62rem;
-      color: var(--muted);
+      font-size: 0.6rem;
+      color: rgba(255,248,231,0.4);
       text-align: center;
       padding: 0 1.5rem;
       line-height: 1.6;
-      position: relative;
-      z-index: 1;
     }
 
-    /* ── ITEM BODY ── */
-    .item-card-body {
-      padding: 1.2rem 1.4rem;
-    }
+    /* Card body */
+    .item-card-body { padding: 1.2rem 1.4rem; }
 
     .field-label {
-      font-family: var(--mono);
-      font-size: 0.62rem;
-      color: var(--accent);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      font-family: var(--display);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: var(--gold2);
       margin-bottom: 0.3rem;
-      margin-top: 0.9rem;
+      margin-top: 0.8rem;
     }
 
     .field-label:first-child { margin-top: 0; }
 
     .field-value {
       font-family: var(--mono);
-      font-size: 0.78rem;
-      color: var(--muted);
+      font-size: 0.75rem;
+      color: rgba(255,248,231,0.6);
       line-height: 1.7;
-      font-style: italic;
     }
 
-    /* ── QUIZ SINGLE CARD ── */
+    /* ═══ SINGLE CARD (QUIZ) ═══ */
     .single-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
+      border: 3px solid var(--gold);
+      background: var(--ink);
+      position: relative;
       overflow: hidden;
+    }
+
+    .single-card::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      border-left: 40px solid transparent;
+      border-top: 40px solid var(--gold);
     }
 
     .single-card-header {
-      padding: 1.4rem 1.8rem;
-      border-bottom: 1px solid var(--border);
+      padding: 1.2rem 1.8rem;
+      border-bottom: 2px solid var(--gold);
       display: flex;
       align-items: center;
       gap: 1rem;
+      background: rgba(255,215,0,0.05);
     }
 
     .single-card-header h3 {
-      font-size: 1rem;
-      font-weight: 600;
+      font-family: var(--display);
+      font-size: 1.3rem;
+      letter-spacing: 0.1em;
+      color: var(--cream);
     }
 
-    .single-card-body {
-      padding: 1.8rem;
-    }
+    .single-card-body { padding: 2rem; }
 
-    /* ── SCREENSHOT WIDE ── */
     .screenshot-wide {
       width: 100%;
       aspect-ratio: 16/7;
-      background: var(--surface2);
-      border: 1px dashed var(--border);
-      border-radius: 8px;
+      background: #111;
+      border: 2px solid rgba(255,215,0,0.3);
       overflow: hidden;
-      margin-bottom: 1.2rem;
-      position: relative;
+      margin-bottom: 1.5rem;
     }
 
     .screenshot-wide img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 8px;
+      display: block;
     }
 
-    /* ── REFLECTION BOX ── */
+    /* Reflection */
     .reflection-box {
-      border-left: 2px solid var(--accent2);
+      border: 2px solid var(--blue);
+      border-left: 6px solid var(--blue);
       padding: 1rem 1.4rem;
-      background: rgba(59,130,246,0.05);
-      border-radius: 0 8px 8px 0;
+      background: rgba(0,68,170,0.08);
       margin-top: 1rem;
+      position: relative;
     }
 
-    .reflection-box .r-label {
-      font-family: var(--mono);
-      font-size: 0.62rem;
-      color: var(--accent2);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 0.4rem;
+    .reflection-box::before {
+      content: '「 REFLECTION 」';
+      position: absolute;
+      top: -0.6rem; left: 1rem;
+      background: var(--ink);
+      color: var(--blue);
+      font-family: var(--display);
+      font-size: 0.7rem;
+      padding: 0 0.5rem;
+      letter-spacing: 0.15em;
     }
 
     .reflection-box p {
       font-family: var(--mono);
       font-size: 0.78rem;
-      color: var(--muted);
+      color: rgba(255,248,231,0.6);
       line-height: 1.8;
-      font-style: italic;
     }
 
-    /* ── FOOTER ── */
+    /* ═══ FOOTER ═══ */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem 3rem;
+      background: var(--purple);
+      border-top: 6px solid var(--gold);
+      padding: 2rem 4rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: relative;
+      z-index: 10;
     }
 
-    footer p {
+    .footer-brand {
+      font-family: var(--display);
+      font-size: 1.2rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-shadow: 2px 2px 0 var(--magenta);
+    }
+
+    .footer-meta {
       font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--muted);
+      font-size: 0.68rem;
+      color: rgba(255,248,231,0.5);
     }
 
-    footer .dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      animation: pulse 2s infinite;
+    .footer-stars { color: var(--gold); font-size: 1rem; letter-spacing: 0.3em; }
+
+    @keyframes jojo-in {
+      from { opacity: 0; transform: translateX(-30px) skewX(-5deg); }
+      to   { opacity: 1; transform: translateX(0) skewX(0); }
     }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
+    @keyframes spin-star {
+      to { transform: rotate(360deg); }
     }
   </style>
 </head>
@@ -460,29 +499,27 @@
 
   <!-- ══ NAV ══ -->
   <nav>
-    <a href="index.html" class="nav-logo">./e-portfolio</a>
+    <a href="index.html" class="nav-logo">ALIDRO</a>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="midterm.html" class="active">Midterm</a></li>
-      <li><a href="final.html">Outputs</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="index.html"><span>Home</span></a></li>
+      <li><a href="midterm.html" class="active"><span>Midterm</span></a></li>
+      <li><a href="final.html"><span>Outputs</span></a></li>
+      <li><a href="contact.html"><span>Contact</span></a></li>
     </ul>
   </nav>
 
   <!-- ══ PAGE HEADER ══ -->
   <header class="page-header">
-    <p class="breadcrumb">
-      <span>Daryl Alidro</span> &nbsp;/&nbsp; BSIT 2-3 &nbsp;/&nbsp; Midterm
-    </p>
+    <p class="breadcrumb"><span>Daryl Alidro</span> &nbsp;◆&nbsp; BSIT 2-3 &nbsp;◆&nbsp; Midterm</p>
     <h1>Midterm <em>Outputs.</em></h1>
     <p>A collection of my midterm quizzes, seatworks, and activities in Object-Oriented Programming using Java.</p>
   </header>
 
   <!-- ══ JUMP NAV ══ -->
   <div class="jump-nav">
-    <a href="#quiz" class="jump-link">Quiz</a>
-    <a href="#seatworks" class="jump-link">Seatworks</a>
-    <a href="#activities" class="jump-link">Activities</a>
+    <a href="#quiz" class="jump-link">◆ Quiz</a>
+    <a href="#seatworks" class="jump-link">◆ Seatworks</a>
+    <a href="#activities" class="jump-link">◆ Activities</a>
   </div>
 
   <main>
@@ -490,9 +527,8 @@
     <!-- ══ QUIZ ══ -->
     <section class="content-section" id="quiz">
       <div class="section-heading">
-        <span class="section-tag">Quiz</span>
+        <span class="section-tag">QUIZ</span>
         <h2>Midterm Quiz</h2>
-        <div class="line"></div>
       </div>
 
       <div class="single-card">
@@ -502,14 +538,11 @@
         </div>
         <div class="single-card-body">
           <div class="screenshot-wide">
-            <img src="quiz.jpg" alt="Midterm Quiz" />
+            <img src="assets/jpgs/quiz.jpg" alt="Midterm Quiz" />
           </div>
-
           <div class="field-label">About</div>
           <div class="field-value">The questions covered the basic concepts of OOP as well as Java programming. I was able to get 40 out of 45 items correct.</div>
-
           <div class="reflection-box">
-            <div class="r-label">// Reflection</div>
             <p>A great way to measure what I have learned in this course. I am pretty satisfied with the results.</p>
           </div>
         </div>
@@ -519,63 +552,59 @@
     <!-- ══ SEATWORKS ══ -->
     <section class="content-section" id="seatworks">
       <div class="section-heading">
-        <span class="section-tag blue">Seatwork</span>
+        <span class="section-tag blue">SEATWORK</span>
         <h2>Midterm Seatworks</h2>
-        <div class="line"></div>
       </div>
 
       <div class="items-grid">
 
-        <!-- SEATWORK 1 -->
         <div class="item-card">
           <div class="item-card-header">
             <span class="item-number">SW — 01</span>
-            <h3>Midterm Seatwork #1</h3>
+            <h3>Seatwork #1</h3>
           </div>
           <div class="paper-note-box">
             <div class="paper-note-icon">📝</div>
             <div class="paper-note-label">Paper-based Output</div>
-            <div class="paper-note-sub">This output was submitted on paper and was not returned. No digital copy available.</div>
+            <div class="paper-note-sub">Submitted on paper and was not returned. No digital copy available.</div>
           </div>
           <div class="item-card-body">
             <div class="field-label">Description</div>
-            <div class="field-value">In this activity we were given a task about unary operators. This was written on a piece of paper and was not returned.</div>
+            <div class="field-value">In this activity we were given a task about unary operators. Written on paper and was not returned.</div>
             <div class="field-label">What I Learned</div>
             <div class="field-value">Overall I did good in this activity with just minimal errors because it's kinda confusing at first.</div>
           </div>
         </div>
 
-        <!-- SEATWORK 2 -->
         <div class="item-card">
           <div class="item-card-header">
             <span class="item-number">SW — 02</span>
-            <h3>Midterm Seatwork #2</h3>
+            <h3>Seatwork #2</h3>
           </div>
           <div class="screenshot-box">
-            <img src="seatwork2.jpg" alt="Seatwork 2" />
+            <img src="assets/jpgs/seatwork2.jpg" alt="Seatwork 2" />
           </div>
           <div class="item-card-body">
             <div class="field-label">Description</div>
             <div class="field-value">A Java program that simulates a digital wallet system with transaction tracking.</div>
             <div class="field-label">What I Learned</div>
-            <div class="field-value">I was able to complete this perfectly with correct methods, validations, and a do-while loop that keeps the program running until the user chooses to exit.</div>
+            <div class="field-value">I was able to complete this perfectly with correct methods, validations, and a do-while loop.</div>
           </div>
         </div>
 
-        <!-- SEATWORK 3 -->
         <div class="item-card">
           <div class="item-card-header">
             <span class="item-number">SW — 03</span>
-            <h3>Midterm Seatwork #3</h3>
+            <h3>Seatwork #3</h3>
           </div>
           <div class="screenshot-box">
-            <img src="seatwork3.jpg" alt="Seatwork 3" />
+            <img src="assets/jpgs/seatwork3.jpg" alt="Seatwork 3" />
           </div>
           <div class="item-card-body">
             <div class="field-label">Description</div>
             <div class="field-value">A simple Java program for a student age analyzer, using the Scanner class to accept user input.</div>
             <div class="field-label">What I Learned</div>
-            <div class="field-value">I kept it simple and direct. Through this seatwork, I feel like I have pretty much mastered how to use the Scanner class in Java.</div>
+            <div class="field-value">I feel like I have pretty much mastered how to use the Scanner class in Java through this seatwork.</div>
           </div>
         </div>
 
@@ -585,105 +614,99 @@
     <!-- ══ ACTIVITIES ══ -->
     <section class="content-section" id="activities">
       <div class="section-heading">
-        <span class="section-tag">Activity</span>
+        <span class="section-tag red">ACTIVITY</span>
         <h2>Midterm Activities</h2>
-        <div class="line"></div>
       </div>
 
       <div class="items-grid">
 
-        <!-- ACTIVITY 1 — Written/PDF only, no Java -->
         <div class="item-card">
           <div class="item-card-header">
             <span class="item-number">ACT — 01</span>
-            <h3>Midterm Activity #1</h3>
+            <h3>Activity #1</h3>
           </div>
           <div class="screenshot-box">
-            <img src="activity1.jpg" alt="Activity 1" />
+            <img src="assets/jpgs/activity1.jpg" alt="Activity 1" />
           </div>
           <div class="item-card-body">
             <div class="field-label">Description</div>
-            <div class="field-value">This activity focused on variables. We were tasked to analyze a program and identify the variable name, data type, variable type, and where it is stored.</div>
+            <div class="field-value">Focused on variables. Tasked to analyze a program and identify variable name, data type, variable type, and where it is stored.</div>
             <div class="field-label">OOP Concepts Applied</div>
             <div class="field-value">Variable declaration, data types, memory storage (stack vs. heap)</div>
             <div class="field-label">What I Learned</div>
-            <div class="field-value">I gained a better understanding of variable behavior — particularly where variables are stored and how they operate in memory.</div>
+            <div class="field-value">Better understanding of variable behavior and how variables are stored in memory.</div>
           </div>
         </div>
 
-        <!-- ACTIVITY 2 — 3 Java programs, no download -->
         <div class="item-card">
           <div class="item-card-header">
             <span class="item-number">ACT — 02</span>
-            <h3>Midterm Activity #2</h3>
+            <h3>Activity #2</h3>
           </div>
           <div class="screenshot-box">
-            <img src="activity2.jpg" alt="Activity 2" />
+            <img src="assets/jpgs/activity2.jpg" alt="Activity 2" />
           </div>
           <div class="item-card-body">
             <div class="field-label">Description</div>
-            <div class="field-value">We were introduced to the different Java operators and tasked to create a Java program that uses all of the operators discussed in class.</div>
+            <div class="field-value">Tasked to create a Java program that uses all of the operators discussed in class.</div>
             <div class="field-label">OOP Concepts Applied</div>
             <div class="field-value">Arithmetic, relational, logical, and assignment operators</div>
             <div class="field-label">What I Learned</div>
-            <div class="field-value">I was able to apply all the operators discussed, which helped me gain a stronger mastery of how different operators work in Java.</div>
+            <div class="field-value">Stronger mastery of how different operators work in Java.</div>
           </div>
         </div>
 
-        <!-- ACTIVITY 3 -->
         <div class="item-card">
           <div class="item-card-header">
             <span class="item-number">ACT — 03</span>
-            <h3>Midterm Activity #3</h3>
+            <h3>Activity #3</h3>
           </div>
           <div class="screenshot-box">
-            <img src="activity3.jpg" alt="Activity 3" />
+            <img src="assets/jpgs/activity3.jpg" alt="Activity 3" />
           </div>
           <div class="item-card-body">
             <div class="field-label">Description</div>
-            <div class="field-value">A basic ATM system simulation using the Scanner class for user input. The program includes Withdraw, Deposit, and Check Balance methods.</div>
+            <div class="field-value">A basic ATM system simulation with Withdraw, Deposit, and Check Balance methods.</div>
             <div class="field-label">OOP Concepts Applied</div>
             <div class="field-value">Methods, Scanner class, control flow, user input handling</div>
             <div class="field-label">What I Learned</div>
-            <div class="field-value">I was able to complete this perfectly since I had prior experience with a similar project. This activity was a piece of cake for me.</div>
+            <div class="field-value">This activity was a piece of cake for me due to prior experience.</div>
           </div>
         </div>
 
-        <!-- ACTIVITY 4 -->
         <div class="item-card">
           <div class="item-card-header">
             <span class="item-number">ACT — 04</span>
-            <h3>Midterm Activity #4</h3>
+            <h3>Activity #4</h3>
           </div>
           <div class="screenshot-box">
-            <img src="activity4.jpg" alt="Activity 4" />
+            <img src="assets/jpgs/activity4.jpg" alt="Activity 4" />
           </div>
           <div class="item-card-body">
             <div class="field-label">Description</div>
-            <div class="field-value">An Enrollment Assessment System using the Scanner class for user input and a switch-case structure to validate and determine whether a student has passed or failed.</div>
+            <div class="field-value">An Enrollment Assessment System using switch-case structure to validate and determine pass or fail status.</div>
             <div class="field-label">OOP Concepts Applied</div>
             <div class="field-value">Switch-case, Scanner class, input validation, conditional logic</div>
             <div class="field-label">What I Learned</div>
-            <div class="field-value">I was a bit confused at first due to the many conditions that needed to be handled, but I pushed through and was able to produce a correct, working program.</div>
+            <div class="field-value">Pushed through confusion from many conditions and produced a correct, working program.</div>
           </div>
         </div>
 
-        <!-- ACTIVITY 5 -->
         <div class="item-card">
           <div class="item-card-header">
             <span class="item-number">ACT — 05</span>
-            <h3>Midterm Activity #5</h3>
+            <h3>Activity #5</h3>
           </div>
           <div class="screenshot-box">
-            <img src="activity5.jpg" alt="Activity 5" />
+            <img src="assets/jpgs/activity5.jpg" alt="Activity 5" />
           </div>
           <div class="item-card-body">
             <div class="field-label">Description</div>
-            <div class="field-value">An Expense Tracker program using void and non-void methods to implement the core features of the application.</div>
+            <div class="field-value">An Expense Tracker program using void and non-void methods for core features.</div>
             <div class="field-label">OOP Concepts Applied</div>
             <div class="field-value">Void and non-void methods, return values, modular programming</div>
             <div class="field-label">What I Learned</div>
-            <div class="field-value">This is my favorite activity because I found it easy and was able to showcase what I know about methods. I finished it quickly and felt confident throughout.</div>
+            <div class="field-value">My favorite activity — showcased my knowledge of methods and finished it quickly and confidently.</div>
           </div>
         </div>
 
@@ -694,8 +717,9 @@
 
   <!-- ══ FOOTER ══ -->
   <footer>
-    <p>&copy; 2025 &mdash; Daryl Alidro &mdash; OOP E-Portfolio</p>
-    <div class="dot"></div>
+    <div class="footer-brand">★ DARYL ALIDRO ★</div>
+    <div class="footer-meta">&copy; 2025 — OOP E-PORTFOLIO — BSIT 2-3</div>
+    <div class="footer-stars">◆ ◆ ◆</div>
   </footer>
 
 </body>
