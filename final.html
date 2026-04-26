@@ -276,30 +276,6 @@
       transform: scale(1.04);
     }
 
-    .preview-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      position: relative;
-    }
-
-    .preview-placeholder::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 12px,
-        rgba(255,255,255,0.015) 12px,
-        rgba(255,255,255,0.015) 24px
-      );
-    }
-
     /* Paper-based preview placeholder */
     .paper-placeholder {
       width: 100%;
@@ -351,23 +327,6 @@
       font-size: 2.2rem;
       position: relative;
       z-index: 1;
-    }
-
-    .preview-hint {
-      font-family: var(--mono);
-      font-size: 0.63rem;
-      color: var(--muted);
-      text-align: center;
-      line-height: 1.6;
-      padding: 0 1rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .preview-hint .fname {
-      color: var(--accent);
-      display: block;
-      margin-top: 0.2rem;
     }
 
     /* File type badge */
@@ -457,52 +416,25 @@
 
     .dl-btn:hover { opacity: 0.85; transform: scale(0.97); }
 
-    .dl-btn.disabled {
-      background: var(--border);
-      color: var(--muted);
-      cursor: not-allowed;
-      pointer-events: none;
-    }
-
-    /* ── HOW TO ADD FILES note ── */
-    .how-to {
-      margin-top: 3rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.8rem;
-    }
-
-    .how-to h3 {
+    .dl-btn-java {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
       font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--accent);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #000;
+      background: #f97316;
+      border: none;
+      border-radius: 6px;
+      padding: 0.45rem 0.9rem;
+      cursor: pointer;
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: opacity 0.2s, transform 0.15s;
     }
 
-    .how-to ol {
-      padding-left: 1.2rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.6rem;
-    }
-
-    .how-to li {
-      font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--muted);
-      line-height: 1.7;
-    }
-
-    .how-to li code {
-      color: var(--accent);
-      background: rgba(200,241,53,0.08);
-      padding: 0.1rem 0.35rem;
-      border-radius: 3px;
-      font-size: 0.72rem;
-    }
+    .dl-btn-java:hover { opacity: 0.85; transform: scale(0.97); }
 
     /* ── FOOTER ── */
     footer {
@@ -596,68 +528,48 @@
 
     <div class="gallery">
 
-      <!-- OUTPUT 1 -->
+      <!-- OUTPUT 1 — Activity 1: Written/PDF only, NO Java file -->
       <div class="output-card">
         <div class="card-preview">
-          <img src="activity1.jpg" alt="Activity 1"/>
-            <div class="file-icon">🖼️</div>
-            <div class="preview-hint">
-              Add preview image
-              <span class="fname">activity1.jpg</span>
-            </div>
-          </div>
-          <span class="file-badge badge-mixed">PDF+Java</span>
+          <img src="activity1.jpg" alt="Activity 1" />
+          <span class="file-badge badge-pdf">PDF</span>
         </div>
         <div class="card-body">
           <div class="card-num">OUTPUT — 01</div>
           <div class="card-title">Activity #1 — Variables</div>
-          <div class="card-reflection">Analyzed a program to identify variable names, data types, variable types, and memory storage locations.</div>
+          <div class="card-reflection">Analyzed a program to identify variable names, data types, variable types, and memory storage locations. Written activity submitted as PDF — no Java program.</div>
         </div>
-        <div class="card-footer" style="gap:0.5rem;flex-wrap:wrap;">
-          <span class="file-size">PDF + Java</span>
+        <div class="card-footer">
+          <span class="file-size">PDF only</span>
           <div style="display:flex;gap:0.5rem;">
-            <a href="BSIT2-3_Alidro_Daryl_CodeAnalysisActivity#1 .pdf" download="activity1.pdf">↓ PDF</a>
-            <a href="Activity1.java" download="Activity1.java" style="background:#f97316;color:#000;">↓ .java</a>
+            <a href="BSIT2-3_Alidro_Daryl_CodeAnalysisActivity#1 .pdf" download="activity1.pdf" class="dl-btn">↓ PDF</a>
           </div>
         </div>
       </div>
 
-      <!-- OUTPUT 2 -->
+      <!-- OUTPUT 2 — Activity 2: 3 Java programs, PDF only downloadable -->
       <div class="output-card">
         <div class="card-preview">
-          <img src="activity2.jpg" alt="Activity 2"/>
-            <div class="file-icon">🖼️</div>
-            <div class="preview-hint">
-              Add preview image
-              <span class="fname">activity2.jpg</span>
-            </div>
-          </div>
-          <span class="file-badge badge-mixed">PDF+Java</span>
+          <img src="activity2.jpg" alt="Activity 2" />
+          <span class="file-badge badge-pdf">PDF</span>
         </div>
         <div class="card-body">
           <div class="card-num">OUTPUT — 02</div>
           <div class="card-title">Activity #2 — Operators</div>
-          <div class="card-reflection">A Java program using all the operators discussed in class — arithmetic, relational, logical, and assignment.</div>
+          <div class="card-reflection">An overall of 3 Java programs using all operators discussed in class — arithmetic, relational, logical, and assignment. Java source files not included in downloads.</div>
         </div>
-        <div class="card-footer" style="gap:0.5rem;flex-wrap:wrap;">
-          <span class="file-size">PDF + Java</span>
+        <div class="card-footer">
+          <span class="file-size">PDF only</span>
           <div style="display:flex;gap:0.5rem;">
-            <a href="BSIT2-3_Alidro_Daryl_OperatorsActivity#2.pdf" download="activity2.pdf">↓ PDF</a>
-            <a href="Activity2.java" download="Activity2.java" class="dl-btn disabled" style="background:#f97316;color:#000;">↓ .java</a>
+            <a href="BSIT2-3_Alidro_Daryl_OperatorsActivity#2.pdf" download="activity2.pdf" class="dl-btn">↓ PDF</a>
           </div>
         </div>
       </div>
 
-      <!-- OUTPUT 3 -->
+      <!-- OUTPUT 3 — Activity 3: ATM System -->
       <div class="output-card">
         <div class="card-preview">
-          <img src="activity3.jpg" alt="Activity 3"/>
-            <div class="file-icon">🖼️</div>
-            <div class="preview-hint">
-              Add preview image
-              <span class="fname">activity3.jpg</span>
-            </div>
-          </div>
+          <img src="activity3.jpg" alt="Activity 3" />
           <span class="file-badge badge-mixed">PDF+Java</span>
         </div>
         <div class="card-body">
@@ -665,25 +577,19 @@
           <div class="card-title">Activity #3 — ATM System</div>
           <div class="card-reflection">A basic ATM simulation with Withdraw, Deposit, and Check Balance methods using the Scanner class.</div>
         </div>
-        <div class="card-footer" style="gap:0.5rem;flex-wrap:wrap;">
+        <div class="card-footer">
           <span class="file-size">PDF + Java</span>
           <div style="display:flex;gap:0.5rem;">
-            <a href="BSIT2-3_Alidro_Daryl_Basic ATM System.pdf" download="activity3.pdf">↓ PDF</a>
-            <a href="BasicATMSystemAlidro.java" download="Activity3.java" style="background:#f97316;color:#000;">↓ .java</a>
+            <a href="BSIT2-3_Alidro_Daryl_Basic ATM System.pdf" download="activity3.pdf" class="dl-btn">↓ PDF</a>
+            <a href="BasicATMSystemAlidro.java" download="Activity3.java" class="dl-btn-java">↓ .java</a>
           </div>
         </div>
       </div>
 
-      <!-- OUTPUT 4 -->
+      <!-- OUTPUT 4 — Activity 4: Enrollment System -->
       <div class="output-card">
         <div class="card-preview">
-          <img src="activity4.jpg" alt="Activity 4"/>
-            <div class="file-icon">🖼️</div>
-            <div class="preview-hint">
-              Add preview image
-              <span class="fname">activity4.jpg</span>
-            </div>
-          </div>
+          <img src="activity4.jpg" alt="Activity 4" />
           <span class="file-badge badge-mixed">PDF+Java</span>
         </div>
         <div class="card-body">
@@ -691,25 +597,19 @@
           <div class="card-title">Activity #4 — Enrollment System</div>
           <div class="card-reflection">An Enrollment Assessment System using switch-case and Scanner to validate student pass/fail status.</div>
         </div>
-        <div class="card-footer" style="gap:0.5rem;flex-wrap:wrap;">
+        <div class="card-footer">
           <span class="file-size">PDF + Java</span>
           <div style="display:flex;gap:0.5rem;">
-            <a href="BSIT2-3_Alidro_Daryl_Midterm Activity #4 – Student Enrollment Assessment System.pdf" download="activity4.pdf">↓ PDF</a>
-            <a href="EnrollmentAssessmentSystemAlidro.java" download="Activity4.java" style="background:#f97316;color:#000;">↓ .java</a>
+            <a href="BSIT2-3_Alidro_Daryl_Midterm Activity #4 – Student Enrollment Assessment System.pdf" download="activity4.pdf" class="dl-btn">↓ PDF</a>
+            <a href="EnrollmentAssessmentSystemAlidro.java" download="Activity4.java" class="dl-btn-java">↓ .java</a>
           </div>
         </div>
       </div>
 
-      <!-- OUTPUT 5 -->
+      <!-- OUTPUT 5 — Activity 5: Expense Tracker -->
       <div class="output-card">
         <div class="card-preview">
-          <img src="activity5.jpg" alt="Activity 5"/>
-            <div class="file-icon">🖼️</div>
-            <div class="preview-hint">
-              Add preview image
-              <span class="fname">activity5.jpg</span>
-            </div>
-          </div>
+          <img src="activity5.jpg" alt="Activity 5" />
           <span class="file-badge badge-mixed">PDF+Java</span>
         </div>
         <div class="card-body">
@@ -717,16 +617,16 @@
           <div class="card-title">Activity #5 — Expense Tracker</div>
           <div class="card-reflection">An Expense Tracker using void and non-void methods. My favorite activity — it let me showcase my knowledge of methods.</div>
         </div>
-        <div class="card-footer" style="gap:0.5rem;flex-wrap:wrap;">
+        <div class="card-footer">
           <span class="file-size">PDF + Java</span>
           <div style="display:flex;gap:0.5rem;">
-            <a href="ExpenseTrackerAlidro.pdf" download="activity5.pdf">↓ PDF</a>
-            <a href="ExpenseTrackerAlidro.java" download="Activity5.java" style="background:#f97316;color:#000;">↓ .java</a>
+            <a href="ExpenseTrackerAlidro.pdf" download="activity5.pdf" class="dl-btn">↓ PDF</a>
+            <a href="ExpenseTrackerAlidro.java" download="Activity5.java" class="dl-btn-java">↓ .java</a>
           </div>
         </div>
       </div>
 
-      <!-- OUTPUT 6 — Seatwork 1 -->
+      <!-- OUTPUT 6 — Seatwork 1: Paper-based -->
       <div class="output-card">
         <div class="card-preview">
           <div class="paper-placeholder">
@@ -747,15 +647,10 @@
         </div>
       </div>
 
-      <!-- OUTPUT 7 — Seatwork 2 -->
+      <!-- OUTPUT 7 — Seatwork 2: Smart Wallet -->
       <div class="output-card">
         <div class="card-preview">
           <img src="seatwork2.jpg" alt="Seatwork 2" />
-            <div class="file-icon">🖼️</div>
-            <div class="preview-hint">
-              Add preview image
-              <span class="fname">seatwork2.jpg</span>
-            </div>
           <span class="file-badge badge-mixed">PDF+Java</span>
         </div>
         <div class="card-body">
@@ -766,21 +661,16 @@
         <div class="card-footer">
           <span class="file-size">PDF + Java</span>
           <div style="display:flex;gap:0.5rem;">
-            <a href="BSIT2-3_Alidro_Daryl_SmartWalletSystem.pdf" download="seatwork2.pdf">↓ PDF</a>
-            <a href="SmartWalletSystemAlidro.java" download="seatwork2.java" style="background:#f97316;color:#000;">↓ .java</a>
+            <a href="BSIT2-3_Alidro_Daryl_SmartWalletSystem.pdf" download="seatwork2.pdf" class="dl-btn">↓ PDF</a>
+            <a href="SmartWalletSystemAlidro.java" download="seatwork2.java" class="dl-btn-java">↓ .java</a>
           </div>
         </div>
       </div>
 
-      <!-- OUTPUT 8 — Seatwork 3 -->
+      <!-- OUTPUT 8 — Seatwork 3: Age Analyzer -->
       <div class="output-card">
         <div class="card-preview">
           <img src="seatwork3.jpg" alt="Seatwork 3" />
-            <div class="file-icon">🖼️</div>
-            <div class="preview-hint">
-              Add preview image
-              <span class="fname">seatwork3.jpg</span>
-            </div>
           <span class="file-badge badge-mixed">PDF+Java</span>
         </div>
         <div class="card-body">
@@ -791,8 +681,8 @@
         <div class="card-footer">
           <span class="file-size">PDF + Java</span>
           <div style="display:flex;gap:0.5rem;">
-            <a href="BSIT2-3_Alidro_Daryl_StudentAgeAnalyzer.pdf" download="seatwork3.pdf">↓ PDF</a>
-            <a href="StudentAgeAnalyzerAlidro.java" download="seatwork3.java" style="background:#f97316;color:#000;">↓ .java</a>
+            <a href="BSIT2-3_Alidro_Daryl_StudentAgeAnalyzer.pdf" download="seatwork3.pdf" class="dl-btn">↓ PDF</a>
+            <a href="StudentAgeAnalyzerAlidro.java" download="seatwork3.java" class="dl-btn-java">↓ .java</a>
           </div>
         </div>
       </div>
@@ -801,11 +691,6 @@
       <div class="output-card">
         <div class="card-preview">
           <img src="quiz.jpg" alt="Quiz" />
-            <div class="file-icon">📄</div>
-            <div class="preview-hint">
-              Add preview image
-              <span class="fname">quiz.jpg</span>
-            </div>
           <span class="file-badge badge-img">N/A</span>
         </div>
         <div class="card-body">
@@ -820,20 +705,6 @@
       </div>
 
     </div>
-
-    <!-- ══ HOW TO ADD FILES ══ -->
-    <div class="how-to">
-      <h3>// How to enable downloads on each card</h3>
-      <ol>
-        <li>Save your file (e.g. <code>Activity1.java</code>) in the same folder as this HTML file.</li>
-        <li>Find the card's <code>&lt;a&gt;</code> download button and change <code>href="#"</code> to <code>href="Activity1.java"</code>.</li>
-        <li>Add <code>download="Activity1.java"</code> as an attribute so it triggers a download instead of opening.</li>
-        <li>Remove <code>class="disabled"</code> from the button so it turns green and becomes clickable.</li>
-        <li>For the preview image, save a screenshot as e.g. <code>activity1.jpg</code> and replace the placeholder div with <code>&lt;img src="activity1.jpg" /&gt;</code>.</li>
-        <li>Update the <code>file-badge</code> class to match the file type: <code>badge-java</code>, <code>badge-img</code>, <code>badge-pdf</code>, or <code>badge-mixed</code>.</li>
-      </ol>
-    </div>
-
   </main>
 
   <!-- ══ FOOTER ══ -->
