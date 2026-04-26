@@ -2,266 +2,314 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" href="https://fav.farm/🖥️" />
+  <link rel="icon" href="https://fav.farm/☕" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>OOP E-Portfolio | Outputs</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+JP:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0d0d0d;
-      --surface: #141414;
-      --surface2: #1a1a1a;
-      --border: #222;
-      --accent: #c8f135;
-      --accent2: #3b82f6;
-      --accent3: #f97316;
-      --text: #f0f0f0;
-      --muted: #666;
-      --mono: 'Space Mono', monospace;
-      --sans: 'Syne', sans-serif;
+      --gold: #FFD700;
+      --gold2: #FFA500;
+      --ink: #0a0608;
+      --purple: #2D0A4E;
+      --magenta: #C8005A;
+      --cream: #FFF8E7;
+      --red: #CC1122;
+      --blue: #0044AA;
+      --java-orange: #E87B00;
+      --mono: 'Share Tech Mono', monospace;
+      --display: 'Bebas Neue', cursive;
+      --body: 'Noto Sans JP', sans-serif;
     }
 
     html { scroll-behavior: smooth; }
-
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--sans);
+      background: var(--ink);
+      color: var(--cream);
+      font-family: var(--body);
       min-height: 100vh;
       overflow-x: hidden;
     }
 
-    /* ── NAV ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,215,0,0.05) 1px, transparent 1px);
+      background-size: 20px 20px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ═══ NAV ═══ */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 100;
+      z-index: 1000;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.2rem 3rem;
-      background: rgba(13,13,13,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 64px;
+      background: var(--ink);
+      border-bottom: 4px solid var(--gold);
+      box-shadow: 0 4px 0 var(--gold2);
     }
 
     .nav-logo {
-      font-family: var(--mono);
-      font-size: 0.85rem;
-      color: var(--accent);
-      letter-spacing: 0.05em;
+      font-family: var(--display);
+      font-size: 1.6rem;
+      color: var(--gold);
       text-decoration: none;
+      letter-spacing: 0.1em;
+      text-shadow: 3px 3px 0 var(--magenta), 6px 6px 0 var(--purple);
     }
-
-    .nav-links {
-      display: flex;
-      gap: 2.5rem;
-      list-style: none;
+    .nav-logo::before {
+      content: '★';
+      color: var(--gold2);
+      margin-right: 0.4rem;
+      animation: spin-star 4s linear infinite;
+      display: inline-block;
     }
-
+    .nav-links { display: flex; gap: 0; list-style: none; }
     .nav-links a {
-      font-family: var(--mono);
-      font-size: 0.78rem;
-      color: var(--muted);
+      font-family: var(--display);
+      font-size: 1rem;
+      color: var(--cream);
       text-decoration: none;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-      position: relative;
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px; left: 0;
-      width: 0; height: 1px;
-      background: var(--accent);
-      transition: width 0.25s;
-    }
-
-    .nav-links a:hover { color: var(--accent); }
-    .nav-links a:hover::after { width: 100%; }
-    .nav-links a.active { color: var(--accent); }
-    .nav-links a.active::after { width: 100%; }
-
-    /* ── PAGE HEADER ── */
-    .page-header {
-      padding: 8rem 3rem 4rem;
-      border-bottom: 1px solid var(--border);
+      letter-spacing: 0.1em;
+      padding: 0 1.4rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      border-left: 2px solid rgba(255,215,0,0.2);
+      transition: all 0.15s;
       position: relative;
       overflow: hidden;
+    }
+    .nav-links a::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 0;
+      background: var(--gold);
+      transition: height 0.15s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a:hover::before { height: 100%; }
+    .nav-links a span { position: relative; z-index: 1; }
+    .nav-links a.active { background: var(--gold); color: var(--ink); }
+
+    /* ═══ PAGE HEADER ═══ */
+    .page-header {
+      padding: 8rem 4rem 4rem;
+      background: var(--ink);
+      position: relative;
+      overflow: hidden;
+      border-bottom: 6px solid var(--gold);
     }
 
     .page-header::before {
       content: 'OUTPUTS';
       position: absolute;
-      top: 50%; right: -1rem;
-      transform: translateY(-50%);
-      font-size: 14rem;
-      font-weight: 800;
-      color: rgba(200,241,53,0.03);
+      bottom: -3rem; right: -2rem;
+      font-family: var(--display);
+      font-size: 16rem;
+      color: rgba(255,215,0,0.04);
       letter-spacing: -0.05em;
       pointer-events: none;
-      white-space: nowrap;
+      line-height: 1;
     }
 
     .breadcrumb {
       font-family: var(--mono);
       font-size: 0.72rem;
-      color: var(--muted);
-      letter-spacing: 0.1em;
+      color: rgba(255,248,231,0.4);
+      letter-spacing: 0.15em;
       margin-bottom: 1rem;
       opacity: 0;
-      animation: fadeUp 0.5s 0.1s forwards;
+      animation: jojo-in 0.5s 0.1s forwards;
     }
-
-    .breadcrumb span { color: var(--accent); }
+    .breadcrumb span { color: var(--gold); }
 
     .page-header h1 {
-      font-size: clamp(2.5rem, 6vw, 5rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
+      font-family: var(--display);
+      font-size: clamp(3rem, 8vw, 7rem);
+      letter-spacing: 0.06em;
       line-height: 1;
-      margin-bottom: 1rem;
+      color: var(--cream);
+      text-shadow: 5px 5px 0 var(--magenta), 10px 10px 0 rgba(0,0,0,0.4);
+      margin-bottom: 0.5rem;
       opacity: 0;
-      animation: fadeUp 0.5s 0.25s forwards;
+      animation: jojo-in 0.5s 0.25s forwards;
+      position: relative; z-index: 1;
     }
-
     .page-header h1 em {
-      color: var(--accent);
+      color: var(--gold);
       font-style: normal;
+      text-shadow: 5px 5px 0 var(--red), 10px 10px 0 rgba(0,0,0,0.5);
     }
-
     .page-header p {
       font-family: var(--mono);
       font-size: 0.82rem;
-      color: var(--muted);
-      max-width: 560px;
+      color: rgba(255,248,231,0.5);
       line-height: 1.7;
+      max-width: 560px;
       opacity: 0;
-      animation: fadeUp 0.5s 0.4s forwards;
+      animation: jojo-in 0.5s 0.4s forwards;
+      position: relative; z-index: 1;
     }
 
-    /* ── OVERALL REFLECTION ── */
+    /* ═══ OVERALL REFLECTION ═══ */
     .overall-reflection {
-      padding: 3rem;
-      border-bottom: 1px solid var(--border);
-      background: var(--surface);
+      background: var(--purple);
+      padding: 4rem;
+      border-bottom: 6px solid var(--gold);
+      position: relative;
+      overflow: hidden;
     }
 
-    .or-inner {
-      max-width: 800px;
-      margin: 0 auto;
+    .overall-reflection::before {
+      content: '「」';
+      position: absolute;
+      top: -3rem; right: -1rem;
+      font-family: var(--display);
+      font-size: 20rem;
+      color: rgba(255,215,0,0.04);
+      pointer-events: none;
+      line-height: 1;
     }
+
+    .or-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; }
 
     .or-label {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      color: var(--accent);
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      margin-bottom: 1rem;
+      font-family: var(--display);
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      color: var(--gold2);
+      margin-bottom: 0.5rem;
     }
 
     .or-inner h2 {
-      font-size: 1.3rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
+      font-family: var(--display);
+      font-size: 2.5rem;
+      letter-spacing: 0.08em;
+      color: var(--cream);
+      text-shadow: 3px 3px 0 var(--magenta);
+      margin-bottom: 1.5rem;
     }
 
     .or-text {
       font-family: var(--mono);
       font-size: 0.82rem;
-      color: #aaa;
-      line-height: 1.9;
-      border-left: 2px solid var(--accent);
-      padding-left: 1.4rem;
+      color: rgba(255,248,231,0.7);
+      line-height: 2;
+      border-left: 6px solid var(--gold);
+      padding-left: 1.5rem;
     }
 
-    /* ── STATS BAR ── */
+    /* ═══ STATS ═══ */
     .stats-bar {
-      padding: 2rem 3rem;
-      border-bottom: 1px solid var(--border);
+      padding: 2.5rem 4rem;
+      border-bottom: 4px solid var(--gold);
       display: flex;
-      gap: 3rem;
-      flex-wrap: wrap;
+      gap: 0;
+      background: var(--gold);
     }
 
     .stat {
+      flex: 1;
       display: flex;
       flex-direction: column;
+      align-items: center;
       gap: 0.3rem;
+      padding: 0 2rem;
+      border-right: 3px solid var(--ink);
     }
 
+    .stat:last-child { border-right: none; }
+
     .stat-num {
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--accent);
+      font-family: var(--display);
+      font-size: 4rem;
       line-height: 1;
+      color: var(--ink);
     }
 
     .stat-label {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      color: var(--muted);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
+      font-family: var(--display);
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      color: rgba(0,0,0,0.6);
     }
 
-    /* ── GALLERY ── */
-    main { padding: 4rem 3rem; }
+    /* ═══ GALLERY ═══ */
+    main { padding: 4rem; position: relative; z-index: 5; }
 
     .gallery-header {
       display: flex;
       align-items: center;
-      gap: 1rem;
-      margin-bottom: 2.5rem;
+      gap: 2rem;
+      margin-bottom: 3rem;
     }
 
     .gallery-header h2 {
-      font-size: 1.4rem;
-      font-weight: 800;
+      font-family: var(--display);
+      font-size: 2.5rem;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      text-shadow: 3px 3px 0 var(--magenta);
       white-space: nowrap;
     }
 
-    .gallery-header .line {
+    .gallery-divider {
       flex: 1;
-      height: 1px;
-      background: var(--border);
+      height: 4px;
+      background: linear-gradient(90deg, var(--gold), transparent);
     }
 
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.4rem;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
     }
 
-    /* ── OUTPUT CARD ── */
+    /* ═══ OUTPUT CARD ═══ */
     .output-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      overflow: hidden;
-      transition: border-color 0.2s, transform 0.2s;
+      border: 3px solid var(--gold);
+      background: var(--ink);
       display: flex;
       flex-direction: column;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
     }
 
     .output-card:hover {
-      border-color: #2e2e2e;
-      transform: translateY(-3px);
+      transform: translate(-4px, -4px);
+      box-shadow: 8px 8px 0 var(--gold);
     }
 
-    /* Preview area */
+    /* corner fold */
+    .output-card::before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0;
+      border-left: 28px solid transparent;
+      border-top: 28px solid var(--gold);
+      z-index: 2;
+    }
+
     .card-preview {
       width: 100%;
       aspect-ratio: 4/3;
-      background: var(--surface2);
+      background: #111;
       position: relative;
       overflow: hidden;
       flex-shrink: 0;
+      border-bottom: 2px solid var(--gold);
     }
 
     .card-preview img {
@@ -270,13 +318,12 @@
       object-fit: cover;
       display: block;
       transition: transform 0.4s;
+      filter: contrast(1.05);
     }
 
-    .output-card:hover .card-preview img {
-      transform: scale(1.04);
-    }
+    .output-card:hover .card-preview img { transform: scale(1.05); }
 
-    /* Paper-based preview placeholder */
+    /* paper placeholder */
     .paper-placeholder {
       width: 100%;
       height: 100%;
@@ -285,133 +332,114 @@
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      position: relative;
-      background: var(--surface2);
-    }
-
-    .paper-placeholder::before {
-      content: '';
-      position: absolute;
-      inset: 0;
       background: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 12px,
-        rgba(255,255,255,0.015) 12px,
-        rgba(255,255,255,0.015) 24px
+        -45deg, #111, #111 12px, #141414 12px, #141414 24px
       );
     }
 
     .paper-placeholder-label {
-      font-family: var(--mono);
-      font-size: 0.6rem;
-      color: var(--accent);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      position: relative;
-      z-index: 1;
+      font-family: var(--display);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
     }
 
     .paper-placeholder-sub {
       font-family: var(--mono);
       font-size: 0.58rem;
-      color: var(--muted);
+      color: rgba(255,248,231,0.4);
       text-align: center;
       padding: 0 1rem;
       line-height: 1.5;
-      position: relative;
-      z-index: 1;
     }
 
-    .file-icon {
-      font-size: 2.2rem;
-      position: relative;
-      z-index: 1;
-    }
+    .file-icon { font-size: 2rem; }
 
-    /* File type badge */
+    /* badge */
     .file-badge {
       position: absolute;
-      top: 0.8rem;
-      right: 0.8rem;
-      font-family: var(--mono);
-      font-size: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      padding: 0.2rem 0.55rem;
-      border-radius: 4px;
-      text-transform: uppercase;
+      bottom: 0.7rem;
+      left: 0.7rem;
+      font-family: var(--display);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      padding: 0.15rem 0.6rem;
       z-index: 2;
     }
 
-    .badge-java  { background: #f97316; color: #000; }
-    .badge-img   { background: #3b82f6; color: #fff; }
-    .badge-pdf   { background: #ef4444; color: #fff; }
-    .badge-mixed { background: var(--accent); color: #000; }
-    .badge-paper { background: #6b7280; color: #fff; }
+    .badge-java  { background: var(--java-orange); color: #000; }
+    .badge-img   { background: var(--blue); color: #fff; }
+    .badge-pdf   { background: var(--red); color: #fff; }
+    .badge-mixed { background: var(--gold); color: #000; }
+    .badge-paper { background: #555; color: #fff; }
 
-    /* Card body */
+    /* card body */
     .card-body {
       padding: 1.2rem 1.4rem;
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 0.6rem;
+      gap: 0.5rem;
     }
 
     .card-num {
-      font-family: var(--mono);
-      font-size: 0.62rem;
-      color: var(--accent);
-      letter-spacing: 0.1em;
+      font-family: var(--display);
+      font-size: 0.8rem;
+      letter-spacing: 0.15em;
+      color: var(--gold2);
     }
 
     .card-title {
-      font-size: 0.95rem;
-      font-weight: 700;
-      line-height: 1.3;
+      font-family: var(--display);
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      color: var(--cream);
+      line-height: 1.2;
     }
 
     .card-reflection {
       font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--muted);
+      font-size: 0.7rem;
+      color: rgba(255,248,231,0.5);
       line-height: 1.7;
-      font-style: italic;
       flex: 1;
     }
 
-    /* Download button */
+    /* card footer */
     .card-footer {
       padding: 0.9rem 1.4rem;
-      border-top: 1px solid var(--border);
+      border-top: 2px solid rgba(255,215,0,0.3);
       display: flex;
       align-items: center;
       justify-content: space-between;
+      gap: 0.5rem;
+      background: rgba(255,215,0,0.03);
     }
 
     .file-size {
       font-family: var(--mono);
-      font-size: 0.62rem;
-      color: var(--muted);
+      font-size: 0.6rem;
+      color: rgba(255,248,231,0.35);
+      letter-spacing: 0.08em;
     }
+
+    .dl-group { display: flex; gap: 0.4rem; flex-wrap: wrap; }
 
     .dl-btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      font-weight: 700;
-      color: var(--bg);
-      background: var(--accent);
+      gap: 0.3rem;
+      font-family: var(--display);
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      color: var(--ink);
+      background: var(--gold);
       border: none;
-      border-radius: 6px;
-      padding: 0.45rem 0.9rem;
+      padding: 0.35rem 0.8rem;
       cursor: pointer;
       text-decoration: none;
-      letter-spacing: 0.05em;
-      transition: opacity 0.2s, transform 0.15s;
+      transition: opacity 0.15s, transform 0.1s;
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
     }
 
     .dl-btn:hover { opacity: 0.85; transform: scale(0.97); }
@@ -419,54 +447,58 @@
     .dl-btn-java {
       display: inline-flex;
       align-items: center;
-      gap: 0.4rem;
-      font-family: var(--mono);
-      font-size: 0.68rem;
-      font-weight: 700;
+      gap: 0.3rem;
+      font-family: var(--display);
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
       color: #000;
-      background: #f97316;
+      background: var(--java-orange);
       border: none;
-      border-radius: 6px;
-      padding: 0.45rem 0.9rem;
+      padding: 0.35rem 0.8rem;
       cursor: pointer;
       text-decoration: none;
-      letter-spacing: 0.05em;
-      transition: opacity 0.2s, transform 0.15s;
+      transition: opacity 0.15s, transform 0.1s;
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
     }
 
     .dl-btn-java:hover { opacity: 0.85; transform: scale(0.97); }
 
-    /* ── FOOTER ── */
+    /* ═══ FOOTER ═══ */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem 3rem;
+      background: var(--purple);
+      border-top: 6px solid var(--gold);
+      padding: 2rem 4rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: relative;
+      z-index: 10;
       margin-top: 4rem;
     }
 
-    footer p {
+    .footer-brand {
+      font-family: var(--display);
+      font-size: 1.2rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-shadow: 2px 2px 0 var(--magenta);
+    }
+
+    .footer-meta {
       font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--muted);
+      font-size: 0.68rem;
+      color: rgba(255,248,231,0.5);
     }
 
-    footer .dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      animation: pulse 2s infinite;
+    .footer-stars { color: var(--gold); font-size: 1rem; letter-spacing: 0.3em; }
+
+    @keyframes jojo-in {
+      from { opacity: 0; transform: translateX(-30px) skewX(-5deg); }
+      to   { opacity: 1; transform: translateX(0) skewX(0); }
     }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
+    @keyframes spin-star {
+      to { transform: rotate(360deg); }
     }
   </style>
 </head>
@@ -474,20 +506,18 @@
 
   <!-- ══ NAV ══ -->
   <nav>
-    <a href="index.html" class="nav-logo">./e-portfolio</a>
+    <a href="index.html" class="nav-logo">ALIDRO</a>
     <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="midterm.html">Midterm</a></li>
-      <li><a href="final.html" class="active">Outputs</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="index.html"><span>Home</span></a></li>
+      <li><a href="midterm.html"><span>Midterm</span></a></li>
+      <li><a href="final.html" class="active"><span>Outputs</span></a></li>
+      <li><a href="contact.html"><span>Contact</span></a></li>
     </ul>
   </nav>
 
   <!-- ══ PAGE HEADER ══ -->
   <header class="page-header">
-    <p class="breadcrumb">
-      <span>Daryl Alidro</span> &nbsp;/&nbsp; BSIT 2-3 &nbsp;/&nbsp; Outputs
-    </p>
+    <p class="breadcrumb"><span>Daryl Alidro</span> &nbsp;◆&nbsp; BSIT 2-3 &nbsp;◆&nbsp; Outputs</p>
     <h1>All <em>Outputs.</em></h1>
     <p>A downloadable collection of all my outputs in Object-Oriented Programming — source files, screenshots, and documents all in one place.</p>
   </header>
@@ -495,8 +525,8 @@
   <!-- ══ OVERALL REFLECTION ══ -->
   <section class="overall-reflection">
     <div class="or-inner">
-      <div class="or-label">// Overall Reflection</div>
-      <h2>What I Learned This Semester</h2>
+      <div class="or-label">◆ OVERALL REFLECTION ◆</div>
+      <h2>WHAT I LEARNED THIS SEMESTER</h2>
       <p class="or-text">
         Throughout this semester in Object-Oriented Programming, I was able to build a solid foundation in Java and deepen my understanding of core OOP concepts. Starting from the basics — variables, data types, and operators — all the way to creating full programs like an ATM System, an Enrollment Assessment System, and an Expense Tracker, each activity pushed me to apply what I learned in a practical way. Some activities came naturally to me, especially the ATM System since I had prior experience with something similar, while others like the Enrollment Assessment System challenged me due to the number of conditions involved. My favorite output was the Expense Tracker, where I got to showcase my knowledge of void and non-void methods. Overall, this course helped me grow not just as a programmer, but in how I approach and solve problems — and getting 40 out of 45 on the midterm quiz is a reflection of that growth.
       </p>
@@ -522,185 +552,185 @@
   <!-- ══ GALLERY ══ -->
   <main>
     <div class="gallery-header">
-      <h2>Output Gallery</h2>
-      <div class="line"></div>
+      <h2>OUTPUT GALLERY</h2>
+      <div class="gallery-divider"></div>
     </div>
 
     <div class="gallery">
 
-      <!-- OUTPUT 1 — Activity 1: Written/PDF only, NO Java file -->
+      <!-- OUTPUT 1 -->
       <div class="output-card">
         <div class="card-preview">
-          <img src="activity1.jpg" alt="Activity 1" />
+          <img src="assets/jpgs/activity1.jpg" alt="Activity 1" />
           <span class="file-badge badge-pdf">PDF</span>
         </div>
         <div class="card-body">
           <div class="card-num">OUTPUT — 01</div>
           <div class="card-title">Activity #1 — Variables</div>
-          <div class="card-reflection">Analyzed a program to identify variable names, data types, variable types, and memory storage locations. Written activity submitted as PDF — no Java program.</div>
+          <div class="card-reflection">Analyzed a program to identify variable names, data types, and memory storage. Written activity submitted as PDF.</div>
         </div>
         <div class="card-footer">
           <span class="file-size">PDF only</span>
-          <div style="display:flex;gap:0.5rem;">
-            <a href="BSIT2-3_Alidro_Daryl_CodeAnalysisActivity#1 .pdf" download="activity1.pdf" class="dl-btn">↓ PDF</a>
+          <div class="dl-group">
+            <a href="assets/files/BSIT2-3_Alidro_Daryl_CodeAnalysisActivity#1 .pdf" download="activity1.pdf" class="dl-btn">↓ PDF</a>
           </div>
         </div>
       </div>
 
-      <!-- OUTPUT 2 — Activity 2: 3 Java programs, PDF only downloadable -->
+      <!-- OUTPUT 2 -->
       <div class="output-card">
         <div class="card-preview">
-          <img src="activity2.jpg" alt="Activity 2" />
+          <img src="assets/jpgs/activity2.jpg" alt="Activity 2" />
           <span class="file-badge badge-pdf">PDF</span>
         </div>
         <div class="card-body">
           <div class="card-num">OUTPUT — 02</div>
           <div class="card-title">Activity #2 — Operators</div>
-          <div class="card-reflection">An overall of 3 Java programs using all operators discussed in class — arithmetic, relational, logical, and assignment. Java source files not included in downloads.</div>
+          <div class="card-reflection">3 Java programs using all operators — arithmetic, relational, logical, and assignment. Java source not included.</div>
         </div>
         <div class="card-footer">
           <span class="file-size">PDF only</span>
-          <div style="display:flex;gap:0.5rem;">
-            <a href="BSIT2-3_Alidro_Daryl_OperatorsActivity#2.pdf" download="activity2.pdf" class="dl-btn">↓ PDF</a>
+          <div class="dl-group">
+            <a href="assets/files/BSIT2-3_Alidro_Daryl_OperatorsActivity#2.pdf" download="activity2.pdf" class="dl-btn">↓ PDF</a>
           </div>
         </div>
       </div>
 
-      <!-- OUTPUT 3 — Activity 3: ATM System -->
+      <!-- OUTPUT 3 -->
       <div class="output-card">
         <div class="card-preview">
-          <img src="activity3.jpg" alt="Activity 3" />
+          <img src="assets/jpgs/activity3.jpg" alt="Activity 3" />
           <span class="file-badge badge-mixed">PDF+Java</span>
         </div>
         <div class="card-body">
           <div class="card-num">OUTPUT — 03</div>
           <div class="card-title">Activity #3 — ATM System</div>
-          <div class="card-reflection">A basic ATM simulation with Withdraw, Deposit, and Check Balance methods using the Scanner class.</div>
+          <div class="card-reflection">Basic ATM simulation with Withdraw, Deposit, and Check Balance methods using the Scanner class.</div>
         </div>
         <div class="card-footer">
           <span class="file-size">PDF + Java</span>
-          <div style="display:flex;gap:0.5rem;">
-            <a href="BSIT2-3_Alidro_Daryl_Basic ATM System.pdf" download="activity3.pdf" class="dl-btn">↓ PDF</a>
-            <a href="BasicATMSystemAlidro.java" download="Activity3.java" class="dl-btn-java">↓ .java</a>
+          <div class="dl-group">
+            <a href="assets/files/BSIT2-3_Alidro_Daryl_Basic ATM System.pdf" download="activity3.pdf" class="dl-btn">↓ PDF</a>
+            <a href="assets/java programs/BasicATMSystemAlidro.java" download="Activity3.java" class="dl-btn-java">↓ .java</a>
           </div>
         </div>
       </div>
 
-      <!-- OUTPUT 4 — Activity 4: Enrollment System -->
+      <!-- OUTPUT 4 -->
       <div class="output-card">
         <div class="card-preview">
-          <img src="activity4.jpg" alt="Activity 4" />
+          <img src="assets/jpgs/activity4.jpg" alt="Activity 4" />
           <span class="file-badge badge-mixed">PDF+Java</span>
         </div>
         <div class="card-body">
           <div class="card-num">OUTPUT — 04</div>
           <div class="card-title">Activity #4 — Enrollment System</div>
-          <div class="card-reflection">An Enrollment Assessment System using switch-case and Scanner to validate student pass/fail status.</div>
+          <div class="card-reflection">Enrollment Assessment System using switch-case and Scanner to validate student pass/fail status.</div>
         </div>
         <div class="card-footer">
           <span class="file-size">PDF + Java</span>
-          <div style="display:flex;gap:0.5rem;">
-            <a href="BSIT2-3_Alidro_Daryl_Midterm Activity #4 – Student Enrollment Assessment System.pdf" download="activity4.pdf" class="dl-btn">↓ PDF</a>
-            <a href="EnrollmentAssessmentSystemAlidro.java" download="Activity4.java" class="dl-btn-java">↓ .java</a>
+          <div class="dl-group">
+            <a href="assets/files/BSIT2-3_Alidro_Daryl_Midterm Activity #4 – Student Enrollment Assessment System.pdf" download="activity4.pdf" class="dl-btn">↓ PDF</a>
+            <a href="assets/java programs/EnrollmentAssessmentSystemAlidro.java" download="Activity4.java" class="dl-btn-java">↓ .java</a>
           </div>
         </div>
       </div>
 
-      <!-- OUTPUT 5 — Activity 5: Expense Tracker -->
+      <!-- OUTPUT 5 -->
       <div class="output-card">
         <div class="card-preview">
-          <img src="activity5.jpg" alt="Activity 5" />
+          <img src="assets/jpgs/activity5.jpg" alt="Activity 5" />
           <span class="file-badge badge-mixed">PDF+Java</span>
         </div>
         <div class="card-body">
           <div class="card-num">OUTPUT — 05</div>
           <div class="card-title">Activity #5 — Expense Tracker</div>
-          <div class="card-reflection">An Expense Tracker using void and non-void methods. My favorite activity — it let me showcase my knowledge of methods.</div>
+          <div class="card-reflection">Expense Tracker using void and non-void methods. My favorite activity — showcases full method knowledge.</div>
         </div>
         <div class="card-footer">
           <span class="file-size">PDF + Java</span>
-          <div style="display:flex;gap:0.5rem;">
-            <a href="ExpenseTrackerAlidro.pdf" download="activity5.pdf" class="dl-btn">↓ PDF</a>
-            <a href="ExpenseTrackerAlidro.java" download="Activity5.java" class="dl-btn-java">↓ .java</a>
+          <div class="dl-group">
+            <a href="assets/files/ExpenseTrackerAlidro.pdf" download="activity5.pdf" class="dl-btn">↓ PDF</a>
+            <a href="assets/java programs/ExpenseTrackerAlidro.java" download="Activity5.java" class="dl-btn-java">↓ .java</a>
           </div>
         </div>
       </div>
 
-      <!-- OUTPUT 6 — Seatwork 1: Paper-based -->
+      <!-- OUTPUT 6 — paper -->
       <div class="output-card">
         <div class="card-preview">
           <div class="paper-placeholder">
             <div class="file-icon">📝</div>
             <div class="paper-placeholder-label">Paper-based Output</div>
-            <div class="paper-placeholder-sub">Submitted on paper — not returned. No digital copy available.</div>
+            <div class="paper-placeholder-sub">Submitted on paper — not returned. No digital copy.</div>
           </div>
           <span class="file-badge badge-paper">Paper</span>
         </div>
         <div class="card-body">
           <div class="card-num">OUTPUT — 06</div>
           <div class="card-title">Seatwork #1 — Unary Operators</div>
-          <div class="card-reflection">A paper-based activity on unary operators. Done well overall with just minimal errors — the topic was a bit tricky at first.</div>
+          <div class="card-reflection">Paper-based activity on unary operators. Done well with minimal errors — the topic was tricky at first.</div>
         </div>
         <div class="card-footer">
           <span class="file-size">Paper (not returned)</span>
-          <span style="font-family:var(--mono);font-size:0.68rem;color:var(--muted);">No file</span>
+          <span style="font-family:var(--mono);font-size:0.65rem;color:rgba(255,248,231,0.3);">No file</span>
         </div>
       </div>
 
-      <!-- OUTPUT 7 — Seatwork 2: Smart Wallet -->
+      <!-- OUTPUT 7 -->
       <div class="output-card">
         <div class="card-preview">
-          <img src="seatwork2.jpg" alt="Seatwork 2" />
+          <img src="assets/jpgs/seatwork2.jpg" alt="Seatwork 2" />
           <span class="file-badge badge-mixed">PDF+Java</span>
         </div>
         <div class="card-body">
           <div class="card-num">OUTPUT — 07</div>
-          <div class="card-title">Seatwork #2 — Smart Wallet System</div>
-          <div class="card-reflection">A Java program simulating a digital wallet with transaction tracking, proper validations, and a do-while loop.</div>
+          <div class="card-title">Seatwork #2 — Smart Wallet</div>
+          <div class="card-reflection">Digital wallet simulation with transaction tracking, validations, and a do-while loop.</div>
         </div>
         <div class="card-footer">
           <span class="file-size">PDF + Java</span>
-          <div style="display:flex;gap:0.5rem;">
-            <a href="BSIT2-3_Alidro_Daryl_SmartWalletSystem.pdf" download="seatwork2.pdf" class="dl-btn">↓ PDF</a>
-            <a href="SmartWalletSystemAlidro.java" download="seatwork2.java" class="dl-btn-java">↓ .java</a>
+          <div class="dl-group">
+            <a href="assets/files/BSIT2-3_Alidro_Daryl_SmartWalletSystem.pdf" download="seatwork2.pdf" class="dl-btn">↓ PDF</a>
+            <a href="assets/java programs/SmartWalletSystemAlidro.java" download="seatwork2.java" class="dl-btn-java">↓ .java</a>
           </div>
         </div>
       </div>
 
-      <!-- OUTPUT 8 — Seatwork 3: Age Analyzer -->
+      <!-- OUTPUT 8 -->
       <div class="output-card">
         <div class="card-preview">
-          <img src="seatwork3.jpg" alt="Seatwork 3" />
+          <img src="assets/jpgs/seatwork3.jpg" alt="Seatwork 3" />
           <span class="file-badge badge-mixed">PDF+Java</span>
         </div>
         <div class="card-body">
           <div class="card-num">OUTPUT — 08</div>
           <div class="card-title">Seatwork #3 — Age Analyzer</div>
-          <div class="card-reflection">A simple student age analyzer in Java using the Scanner class. Straightforward and a good exercise in mastering Scanner.</div>
+          <div class="card-reflection">Student age analyzer in Java using Scanner class. Straightforward and a great Scanner exercise.</div>
         </div>
         <div class="card-footer">
           <span class="file-size">PDF + Java</span>
-          <div style="display:flex;gap:0.5rem;">
-            <a href="BSIT2-3_Alidro_Daryl_StudentAgeAnalyzer.pdf" download="seatwork3.pdf" class="dl-btn">↓ PDF</a>
-            <a href="StudentAgeAnalyzerAlidro.java" download="seatwork3.java" class="dl-btn-java">↓ .java</a>
+          <div class="dl-group">
+            <a href="assets/files/BSIT2-3_Alidro_Daryl_StudentAgeAnalyzer.pdf" download="seatwork3.pdf" class="dl-btn">↓ PDF</a>
+            <a href="assets/java programs/StudentAgeAnalyzerAlidro.java" download="seatwork3.java" class="dl-btn-java">↓ .java</a>
           </div>
         </div>
       </div>
 
-      <!-- OUTPUT 9 — Quiz -->
+      <!-- OUTPUT 9 -->
       <div class="output-card">
         <div class="card-preview">
-          <img src="quiz.jpg" alt="Quiz" />
+          <img src="assets/jpgs/quiz.jpg" alt="Quiz" />
           <span class="file-badge badge-img">N/A</span>
         </div>
         <div class="card-body">
           <div class="card-num">OUTPUT — 09</div>
           <div class="card-title">Midterm Quiz</div>
-          <div class="card-reflection">40 out of 45 correct. Covered basic OOP concepts and Java programming. A solid measure of what I learned so far.</div>
+          <div class="card-reflection">40 out of 45 correct. Covered OOP concepts and Java programming. A solid measure of my learning.</div>
         </div>
         <div class="card-footer">
           <span class="file-size">Online Quiz</span>
-          <span style="font-family:var(--mono);font-size:0.68rem;color:var(--muted);">No file</span>
+          <span style="font-family:var(--mono);font-size:0.65rem;color:rgba(255,248,231,0.3);">No file</span>
         </div>
       </div>
 
@@ -709,8 +739,9 @@
 
   <!-- ══ FOOTER ══ -->
   <footer>
-    <p>&copy; 2025 &mdash; Daryl Alidro &mdash; OOP E-Portfolio</p>
-    <div class="dot"></div>
+    <div class="footer-brand">★ DARYL ALIDRO ★</div>
+    <div class="footer-meta">&copy; 2025 — OOP E-PORTFOLIO — BSIT 2-3</div>
+    <div class="footer-stars">◆ ◆ ◆</div>
   </footer>
 
 </body>
