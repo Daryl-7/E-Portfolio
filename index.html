@@ -2,188 +2,416 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" href="https://fav.farm/🖥️" />
+  <link rel="icon" href="https://fav.farm/☕" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>OOP E-Portfolio | Home</title>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <title>OOP E-Portfolio | Daryl Alidro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Bebas+Neue&family=Noto+Sans+JP:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0d0d0d;
-      --surface: #141414;
-      --border: #222;
-      --accent: #c8f135;
-      --accent2: #3b82f6;
-      --text: #f0f0f0;
-      --muted: #666;
-      --mono: 'Space Mono', monospace;
-      --sans: 'Syne', sans-serif;
+      --gold: #FFD700;
+      --gold2: #FFA500;
+      --ink: #0a0608;
+      --purple: #2D0A4E;
+      --magenta: #C8005A;
+      --cream: #FFF8E7;
+      --red: #CC1122;
+      --mono: 'Share Tech Mono', monospace;
+      --display: 'Bebas Neue', cursive;
+      --body: 'Noto Sans JP', sans-serif;
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: var(--sans);
+      background: var(--ink);
+      color: var(--cream);
+      font-family: var(--body);
       min-height: 100vh;
       overflow-x: hidden;
+      cursor: crosshair;
     }
 
-    /* ── NAV ── */
+    /* ═══ HALFTONE OVERLAY ═══ */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,215,0,0.06) 1px, transparent 1px);
+      background-size: 18px 18px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ═══ SPEED LINES BG ═══ */
+    .speed-lines {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.04;
+      background: repeating-linear-gradient(
+        -45deg,
+        var(--gold),
+        var(--gold) 1px,
+        transparent 1px,
+        transparent 30px
+      );
+    }
+
+    /* ═══ NAV ═══ */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
-      z-index: 100;
+      z-index: 1000;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 1.2rem 3rem;
-      background: rgba(13,13,13,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 64px;
+      background: var(--ink);
+      border-bottom: 4px solid var(--gold);
+      box-shadow: 0 4px 0 var(--gold2), 0 8px 0 var(--ink);
     }
 
     .nav-logo {
-      font-family: var(--mono);
-      font-size: 0.85rem;
-      color: var(--accent);
-      letter-spacing: 0.05em;
+      font-family: var(--display);
+      font-size: 1.6rem;
+      color: var(--gold);
       text-decoration: none;
+      letter-spacing: 0.1em;
+      text-shadow: 3px 3px 0 var(--magenta), 6px 6px 0 var(--purple);
+      position: relative;
+    }
+
+    .nav-logo::before {
+      content: '★';
+      color: var(--gold2);
+      margin-right: 0.4rem;
+      animation: spin-star 4s linear infinite;
+      display: inline-block;
     }
 
     .nav-links {
       display: flex;
-      gap: 2.5rem;
+      gap: 0;
       list-style: none;
     }
 
     .nav-links a {
-      font-family: var(--mono);
-      font-size: 0.78rem;
-      color: var(--muted);
+      font-family: var(--display);
+      font-size: 1rem;
+      color: var(--cream);
       text-decoration: none;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      transition: color 0.2s;
-      position: relative;
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px; left: 0;
-      width: 0; height: 1px;
-      background: var(--accent);
-      transition: width 0.25s;
-    }
-
-    .nav-links a:hover { color: var(--accent); }
-    .nav-links a:hover::after { width: 100%; }
-    .nav-links a.active { color: var(--accent); }
-    .nav-links a.active::after { width: 100%; }
-
-    /* ── HERO ── */
-    .hero {
-      min-height: 100vh;
+      letter-spacing: 0.1em;
+      padding: 0 1.4rem;
+      height: 64px;
       display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 8rem 3rem 4rem;
+      align-items: center;
+      border-left: 2px solid rgba(255,215,0,0.2);
+      transition: all 0.15s;
       position: relative;
       overflow: hidden;
     }
 
-    .hero::before {
+    .nav-links a::before {
       content: '';
       position: absolute;
-      top: -200px; right: -200px;
-      width: 600px; height: 600px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(200,241,53,0.07) 0%, transparent 70%);
+      bottom: 0; left: 0; right: 0;
+      height: 0;
+      background: var(--gold);
+      transition: height 0.15s;
+    }
+
+    .nav-links a:hover { color: var(--ink); }
+    .nav-links a:hover::before { height: 100%; }
+    .nav-links a span { position: relative; z-index: 1; }
+    .nav-links a.active { background: var(--gold); color: var(--ink); }
+
+    /* ═══ HERO ═══ */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+      padding-top: 64px;
+    }
+
+    /* Diagonal split */
+    .hero::after {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0;
+      left: 50%;
+      width: 80px;
+      background: var(--gold);
+      transform: skewX(-6deg) translateX(-50%);
+      z-index: 2;
+    }
+
+    .hero-left {
+      background: var(--purple);
+      padding: 5rem 4rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 3;
+      overflow: hidden;
+    }
+
+    .hero-left::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        90deg,
+        rgba(255,215,0,0.04) 0px,
+        rgba(255,215,0,0.04) 2px,
+        transparent 2px,
+        transparent 40px
+      );
       pointer-events: none;
+    }
+
+    .hero-right {
+      background: var(--ink);
+      padding: 5rem 4rem 4rem 5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      z-index: 3;
     }
 
     .hero-tag {
       font-family: var(--mono);
       font-size: 0.75rem;
-      color: var(--accent);
-      letter-spacing: 0.15em;
+      color: var(--gold);
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       margin-bottom: 1.5rem;
+      border-left: 4px solid var(--gold);
+      padding-left: 0.8rem;
       opacity: 0;
-      animation: fadeUp 0.6s 0.2s forwards;
+      animation: jojo-in 0.5s 0.1s cubic-bezier(0.23,1,0.32,1) forwards;
     }
 
     .hero-name {
-      font-size: clamp(3rem, 8vw, 7rem);
-      font-weight: 800;
-      line-height: 1;
-      letter-spacing: -0.02em;
-      margin-bottom: 1rem;
+      font-family: var(--display);
+      font-size: clamp(4rem, 8vw, 8rem);
+      line-height: 0.9;
+      letter-spacing: 0.04em;
+      color: var(--cream);
+      text-shadow: 4px 4px 0 var(--magenta), 8px 8px 0 rgba(0,0,0,0.5);
+      margin-bottom: 0.3rem;
       opacity: 0;
-      animation: fadeUp 0.6s 0.35s forwards;
+      animation: jojo-in 0.5s 0.25s cubic-bezier(0.23,1,0.32,1) forwards;
     }
 
-    .hero-name span {
-      color: var(--accent);
+    .hero-name-accent {
+      font-family: var(--display);
+      font-size: clamp(4.5rem, 9vw, 9rem);
+      line-height: 0.9;
+      letter-spacing: 0.04em;
+      color: var(--gold);
+      text-shadow: 5px 5px 0 var(--red), 10px 10px 0 rgba(0,0,0,0.6);
       display: block;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: jojo-in 0.5s 0.4s cubic-bezier(0.23,1,0.32,1) forwards;
     }
 
-    .hero-sub {
+    /* ── MANGA PANEL BORDER ── */
+    .manga-box {
+      border: 3px solid var(--gold);
+      padding: 1.2rem 1.4rem;
+      position: relative;
+      background: rgba(0,0,0,0.4);
+      opacity: 0;
+      animation: jojo-in 0.5s 0.55s cubic-bezier(0.23,1,0.32,1) forwards;
+    }
+
+    .manga-box::before {
+      content: '◆ OOP E-PORTFOLIO ◆';
+      position: absolute;
+      top: -0.65rem;
+      left: 1rem;
+      background: var(--purple);
+      color: var(--gold);
+      font-family: var(--display);
+      font-size: 0.75rem;
+      padding: 0 0.5rem;
+      letter-spacing: 0.15em;
+    }
+
+    .manga-box::after {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border: 1px solid rgba(255,215,0,0.3);
+      pointer-events: none;
+    }
+
+    .manga-box p {
       font-family: var(--mono);
-      font-size: 0.9rem;
-      color: var(--muted);
+      font-size: 0.8rem;
+      color: #ccc;
+      line-height: 1.9;
+    }
+
+    /* RIGHT SIDE of hero */
+    .hero-stand-name {
+      font-family: var(--display);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      text-shadow: 3px 3px 0 var(--magenta);
       margin-bottom: 0.5rem;
       opacity: 0;
-      animation: fadeUp 0.6s 0.5s forwards;
+      animation: jojo-in 0.5s 0.35s cubic-bezier(0.23,1,0.32,1) forwards;
     }
 
-    .hero-section-label {
+    .hero-stand-sub {
       font-family: var(--mono);
-      font-size: 0.85rem;
-      color: var(--muted);
-      margin-bottom: 3rem;
+      font-size: 0.7rem;
+      color: var(--gold2);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 2.5rem;
       opacity: 0;
-      animation: fadeUp 0.6s 0.6s forwards;
+      animation: jojo-in 0.5s 0.45s cubic-bezier(0.23,1,0.32,1) forwards;
     }
 
-    .hero-intro-box {
-      max-width: 680px;
-      border-left: 2px solid var(--accent);
-      padding: 1.2rem 1.5rem;
-      background: rgba(200,241,53,0.04);
-      border-radius: 0 8px 8px 0;
+    /* stat blocks */
+    .stat-cluster {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
       opacity: 0;
-      animation: fadeUp 0.6s 0.75s forwards;
+      animation: jojo-in 0.5s 0.6s cubic-bezier(0.23,1,0.32,1) forwards;
     }
 
-    .hero-intro-box p {
-      font-family: var(--mono);
-      font-size: 0.82rem;
-      color: #aaa;
-      line-height: 1.8;
-    }
-
-    /* ── PROFILE PHOTO SECTION ── */
-    .photo-section {
-      padding: 5rem 3rem;
+    .stat-row {
       display: flex;
       align-items: center;
-      gap: 4rem;
-      border-top: 1px solid var(--border);
+      gap: 1rem;
+    }
+
+    .stat-key {
+      font-family: var(--display);
+      font-size: 0.9rem;
+      letter-spacing: 0.12em;
+      color: var(--gold2);
+      width: 90px;
+      flex-shrink: 0;
+    }
+
+    .stat-bar-wrap {
+      flex: 1;
+      height: 10px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,215,0,0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), var(--gold2));
+      animation: bar-grow 1s 0.8s cubic-bezier(0.23,1,0.32,1) both;
+      transform-origin: left;
+    }
+
+    @keyframes bar-grow {
+      from { transform: scaleX(0); }
+      to   { transform: scaleX(1); }
+    }
+
+    .stat-val {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--gold);
+      width: 30px;
+      text-align: right;
+    }
+
+    /* ═══ SECTION: ABOUT ═══ */
+    .about-section {
+      position: relative;
+      z-index: 5;
+      background: var(--cream);
+      color: var(--ink);
+      padding: 5rem 4rem;
+      overflow: hidden;
+    }
+
+    .about-section::before {
+      content: 'ABOUT';
+      position: absolute;
+      top: -2rem; right: -2rem;
+      font-family: var(--display);
+      font-size: 16rem;
+      color: rgba(45,10,78,0.06);
+      letter-spacing: -0.05em;
+      pointer-events: none;
+      line-height: 1;
+    }
+
+    .jojo-chapter {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .chapter-num {
+      font-family: var(--display);
+      font-size: 5rem;
+      line-height: 1;
+      color: var(--purple);
+      text-shadow: 3px 3px 0 var(--magenta);
+    }
+
+    .chapter-title {
+      border-left: 6px solid var(--purple);
+      padding-left: 1rem;
+    }
+
+    .chapter-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--magenta);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.2rem;
+    }
+
+    .chapter-title h2 {
+      font-family: var(--display);
+      font-size: 2.5rem;
+      letter-spacing: 0.06em;
+      color: var(--ink);
+    }
+
+    /* INFO GRID */
+    .info-panel {
+      display: flex;
+      align-items: flex-start;
+      gap: 3rem;
     }
 
     .photo-frame {
       flex-shrink: 0;
-      width: 220px;
-      height: 220px;
-      border-radius: 12px;
-      border: 2px solid var(--border);
+      width: 200px;
+      height: 240px;
+      border: 6px solid var(--ink);
+      box-shadow: 8px 8px 0 var(--purple), 14px 14px 0 var(--gold);
       overflow: hidden;
       position: relative;
-      background: var(--surface);
+      background: var(--purple);
     }
 
     .photo-frame img {
@@ -191,285 +419,380 @@
       height: 100%;
       object-fit: cover;
       display: block;
+      filter: contrast(1.1);
     }
 
-    .photo-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      color: var(--muted);
-      font-family: var(--mono);
-      font-size: 0.7rem;
+    .photo-frame-label {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      background: var(--gold);
+      color: var(--ink);
+      font-family: var(--display);
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
       text-align: center;
-      padding: 1rem;
+      padding: 0.3rem;
     }
 
-    .photo-placeholder .icon {
-      font-size: 2.5rem;
-      margin-bottom: 0.5rem;
-    }
-
-    .photo-info { flex: 1; }
-
-    .photo-info h2 {
-      font-size: 2rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-    }
-
-    .info-grid {
+    .info-cards {
+      flex: 1;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1rem;
     }
 
-    .info-item {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 8px;
+    .info-cell {
+      border: 3px solid var(--ink);
       padding: 1rem 1.2rem;
+      position: relative;
+      background: white;
+      box-shadow: 4px 4px 0 var(--ink);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .info-cell:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+
+    .info-cell::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 4px;
+      background: var(--purple);
     }
 
     .info-label {
       font-family: var(--mono);
-      font-size: 0.65rem;
-      color: var(--accent);
-      letter-spacing: 0.1em;
+      font-size: 0.6rem;
+      color: var(--magenta);
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.4rem;
     }
 
     .info-value {
-      font-family: var(--mono);
-      font-size: 0.85rem;
-      color: var(--text);
+      font-family: var(--display);
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      color: var(--ink);
     }
 
-    /* ── CONTENTS PREVIEW ── */
-    .contents {
-      padding: 5rem 3rem;
-      border-top: 1px solid var(--border);
-    }
-
-    .section-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 2.5rem;
-    }
-
-    .section-header h2 {
-      font-size: 1.5rem;
-      font-weight: 800;
-    }
-
-    .section-header .line {
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1.2rem;
-    }
-
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.8rem;
-      text-decoration: none;
-      color: var(--text);
-      transition: border-color 0.2s, transform 0.2s;
-      display: block;
+    /* ═══ PORTFOLIO CARDS ═══ */
+    .contents-section {
       position: relative;
+      z-index: 5;
+      background: var(--ink);
+      padding: 5rem 4rem;
       overflow: hidden;
     }
 
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 2px;
-      background: var(--accent);
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s;
+    .section-title-row {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 3rem;
     }
 
-    .card:hover { border-color: #333; transform: translateY(-3px); }
-    .card:hover::before { transform: scaleX(1); }
+    .section-title-row h2 {
+      font-family: var(--display);
+      font-size: 3rem;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      text-shadow: 3px 3px 0 var(--magenta);
+      white-space: nowrap;
+    }
 
-    .card-num {
-      font-family: var(--mono);
+    .title-divider {
+      flex: 1;
+      height: 4px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      position: relative;
+    }
+
+    .title-divider::after {
+      content: '◆◆◆';
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gold);
       font-size: 0.7rem;
-      color: var(--accent);
+      letter-spacing: 0.2em;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+
+    .jojo-card {
+      border: 3px solid var(--gold);
+      border-collapse: collapse;
+      padding: 2.5rem 2rem;
+      text-decoration: none;
+      color: var(--cream);
+      position: relative;
+      overflow: hidden;
+      background: var(--ink);
+      transition: background 0.2s;
+      display: block;
+    }
+
+    .jojo-card + .jojo-card { border-left: none; }
+
+    .jojo-card::before {
+      content: '';
+      position: absolute;
+      top: -100%; left: -100%;
+      width: 300%; height: 300%;
+      background: var(--purple);
+      transform: rotate(-45deg) translateY(100%);
+      transition: transform 0.35s cubic-bezier(0.23,1,0.32,1);
+    }
+
+    .jojo-card:hover::before { transform: rotate(-45deg) translateY(40%); }
+    .jojo-card:hover { border-color: var(--cream); }
+
+    .jojo-card > * { position: relative; z-index: 1; }
+
+    .card-roman {
+      font-family: var(--display);
+      font-size: 4rem;
+      color: rgba(255,215,0,0.15);
+      line-height: 1;
       margin-bottom: 1rem;
       letter-spacing: 0.1em;
     }
 
-    .card h3 {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-bottom: 0.6rem;
-    }
-
-    .card p {
+    .card-label {
       font-family: var(--mono);
-      font-size: 0.75rem;
-      color: var(--muted);
-      line-height: 1.7;
+      font-size: 0.65rem;
+      color: var(--gold);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
     }
 
-    .card-arrow {
-      position: absolute;
-      bottom: 1.5rem; right: 1.5rem;
+    .card-title-big {
+      font-family: var(--display);
+      font-size: 1.8rem;
+      letter-spacing: 0.06em;
+      color: var(--cream);
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 0 var(--magenta);
+    }
+
+    .card-desc {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: rgba(255,248,231,0.6);
+      line-height: 1.8;
+    }
+
+    .card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 2rem;
+      font-family: var(--display);
       font-size: 1rem;
-      color: var(--muted);
-      transition: color 0.2s, transform 0.2s;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      border-bottom: 2px solid var(--gold);
+      padding-bottom: 2px;
     }
 
-    .card:hover .card-arrow { color: var(--accent); transform: translate(3px, -3px); }
-
-    /* ── FOOTER ── */
+    /* ═══ FOOTER ═══ */
     footer {
-      border-top: 1px solid var(--border);
-      padding: 2rem 3rem;
+      background: var(--purple);
+      border-top: 6px solid var(--gold);
+      padding: 2rem 4rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      position: relative;
+      z-index: 10;
     }
 
-    footer p {
+    .footer-brand {
+      font-family: var(--display);
+      font-size: 1.2rem;
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      text-shadow: 2px 2px 0 var(--magenta);
+    }
+
+    .footer-meta {
       font-family: var(--mono);
-      font-size: 0.72rem;
-      color: var(--muted);
+      font-size: 0.68rem;
+      color: rgba(255,248,231,0.5);
+      letter-spacing: 0.1em;
     }
 
-    footer .dot {
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      animation: pulse 2s infinite;
+    .footer-stars {
+      color: var(--gold);
+      font-size: 1rem;
+      letter-spacing: 0.3em;
+      animation: twinkle 2s infinite;
     }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
+    /* ═══ ANIMATIONS ═══ */
+    @keyframes jojo-in {
+      from { opacity: 0; transform: translateX(-30px) skewX(-5deg); }
+      to   { opacity: 1; transform: translateX(0) skewX(0); }
     }
 
-    @keyframes pulse {
+    @keyframes spin-star {
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes twinkle {
       0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
+      50% { opacity: 0.4; }
     }
   </style>
 </head>
 <body>
 
+  <div class="speed-lines"></div>
+
   <!-- ══ NAV ══ -->
   <nav>
-    <a href="index.html" class="nav-logo">./e-portfolio</a>
+    <a href="index.html" class="nav-logo">ALIDRO</a>
     <ul class="nav-links">
-      <li><a href="index.html" class="active">Home</a></li>
-      <li><a href="midterm.html">Midterm</a></li>
-      <li><a href="final.html">Outputs</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="index.html" class="active"><span>Home</span></a></li>
+      <li><a href="midterm.html"><span>Midterm</span></a></li>
+      <li><a href="final.html"><span>Outputs</span></a></li>
+      <li><a href="contact.html"><span>Contact</span></a></li>
     </ul>
   </nav>
 
   <!-- ══ HERO ══ -->
   <section class="hero">
-    <p class="hero-tag">// OOP E-Portfolio &mdash; Midterm</p>
-    <h1 class="hero-name">
-      Daryl<span>Alidro.</span>
-    </h1>
-    <p class="hero-sub">Course: Object-Oriented Programming</p>
-    <p class="hero-section-label">Section: BSIT 2-3</p>
-    <div class="hero-intro-box">
-      <p>
-        This e-portfolio presents my Midterm Project in Object-Oriented
-        Programming using Java. It includes quizzes, activities, and exams
-        that demonstrate my understanding of OOP concepts such as classes,
-        objects, inheritance, and encapsulation.
-      </p>
-    </div>
-  </section>
-
-  <!-- ══ PHOTO + INFO ══ -->
-  <section class="photo-section">
-    <div class="photo-frame">
-      <!--
-        TO ADD YOUR PHOTO:
-        1. Save your photo as "profile.jpg" in the same folder as this file
-        2. Delete the div.photo-placeholder below
-        3. Uncomment the img tag below
-      -->
-        <img src="profile.jpg" alt="Profile Photo" />
-        <div class="icon">🖼️</div>
-        <div>Save your photo as<br/><strong>profile.jpg</strong><br/>in the same folder</div>
+    <div class="hero-left">
+      <p class="hero-tag">// OOP E-PORTFOLIO — BSIT 2-3</p>
+      <h1 class="hero-name">DARYL</h1>
+      <span class="hero-name-accent">ALIDRO.</span>
+      <div class="manga-box">
+        <p>This e-portfolio presents my Midterm Project in Object-Oriented Programming using Java. It includes quizzes, activities, and exams that demonstrate my understanding of OOP concepts such as classes, objects, inheritance, and encapsulation.</p>
+      </div>
     </div>
 
-    <div class="photo-info">
-      <h2>About Me</h2>
-      <div class="info-grid">
-        <div class="info-item">
-          <div class="info-label">Full Name</div>
-          <div class="info-value">Daryl Alidro</div>
+    <div class="hero-right">
+      <div class="hero-stand-name">OBJECT-ORIENTED PROGRAMMING</div>
+      <div class="hero-stand-sub">★ Stand User Profile ★</div>
+
+      <div class="stat-cluster">
+        <div class="stat-row">
+          <div class="stat-key">Power</div>
+          <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:88%"></div></div>
+          <div class="stat-val">A</div>
         </div>
-        <div class="info-item">
-          <div class="info-label">Course</div>
-          <div class="info-value">Object-Oriented Programming</div>
+        <div class="stat-row">
+          <div class="stat-key">Speed</div>
+          <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:75%"></div></div>
+          <div class="stat-val">B</div>
         </div>
-        <div class="info-item">
-          <div class="info-label">Section</div>
-          <div class="info-value">BSIT 2-3</div>
+        <div class="stat-row">
+          <div class="stat-key">Precision</div>
+          <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:92%"></div></div>
+          <div class="stat-val">A</div>
         </div>
-        <div class="info-item">
-          <div class="info-label">Language</div>
-          <div class="info-value">Java</div>
+        <div class="stat-row">
+          <div class="stat-key">Dev Range</div>
+          <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:80%"></div></div>
+          <div class="stat-val">B</div>
+        </div>
+        <div class="stat-row">
+          <div class="stat-key">Potential</div>
+          <div class="stat-bar-wrap"><div class="stat-bar-fill" style="width:95%"></div></div>
+          <div class="stat-val">A</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ══ PAGE CARDS ══ -->
-  <section class="contents">
-    <div class="section-header">
-      <h2>Portfolio Contents</h2>
-      <div class="line"></div>
+  <!-- ══ ABOUT ══ -->
+  <section class="about-section">
+    <div class="jojo-chapter">
+      <div class="chapter-num">01</div>
+      <div class="chapter-title">
+        <div class="chapter-label">Chapter One</div>
+        <h2>THE STAND USER</h2>
+      </div>
     </div>
-    <div class="cards">
-      <a href="midterm.html" class="card">
-        <div class="card-num">01 &mdash; MIDTERM</div>
-        <h3>Midterm Outputs</h3>
-        <p>Quizzes, seatwork, activities (ATM, decision structures, methods), and midterm exam with reflections.</p>
-        <span class="card-arrow">↗</span>
+
+    <div class="info-panel">
+      <div class="photo-frame">
+        <img src="profile.jpg" alt="Daryl Alidro" />
+        <div class="photo-frame-label">★ DARYL ALIDRO ★</div>
+      </div>
+
+      <div class="info-cards">
+        <div class="info-cell">
+          <div class="info-label">Full Name</div>
+          <div class="info-value">Daryl Alidro</div>
+        </div>
+        <div class="info-cell">
+          <div class="info-label">Course</div>
+          <div class="info-value">Object-Oriented Programming</div>
+        </div>
+        <div class="info-cell">
+          <div class="info-label">Section</div>
+          <div class="info-value">BSIT 2-3</div>
+        </div>
+        <div class="info-cell">
+          <div class="info-label">Language</div>
+          <div class="info-value">Java</div>
+        </div>
+        <div class="info-cell" style="grid-column: span 2;">
+          <div class="info-label">Stand Name</div>
+          <div class="info-value" style="font-size:1.3rem;color:var(--purple);">「 JAVA EXECUTOR 」</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CONTENTS ══ -->
+  <section class="contents-section">
+    <div class="section-title-row">
+      <h2>PORTFOLIO CONTENTS</h2>
+      <div class="title-divider"></div>
+    </div>
+
+    <div class="cards-grid">
+      <a href="midterm.html" class="jojo-card">
+        <div class="card-roman">I</div>
+        <div class="card-label">01 — Midterm</div>
+        <div class="card-title-big">MIDTERM OUTPUTS</div>
+        <div class="card-desc">Quizzes, seatwork, activities (ATM, decision structures, methods), and midterm exam with reflections.</div>
+        <div class="card-cta">ENTER ◆</div>
       </a>
-      <a href="final.html" class="card">
-        <div class="card-num">02 &mdash; OUTPUTS</div>
-        <h3>All Outputs</h3>
-        <p>A downloadable collection of all my OOP outputs — source files, screenshots, and documents in one place.</p>
-        <span class="card-arrow">↗</span>
+      <a href="final.html" class="jojo-card">
+        <div class="card-roman">II</div>
+        <div class="card-label">02 — Outputs</div>
+        <div class="card-title-big">ALL OUTPUTS</div>
+        <div class="card-desc">A downloadable collection of all my OOP outputs — source files, screenshots, and documents in one place.</div>
+        <div class="card-cta">ENTER ◆</div>
       </a>
-      <a href="contact.html" class="card">
-        <div class="card-num">03 &mdash; CONTACT</div>
-        <h3>Contact</h3>
-        <p>Get in touch or view my other profiles and academic information.</p>
-        <span class="card-arrow">↗</span>
+      <a href="contact.html" class="jojo-card">
+        <div class="card-roman">III</div>
+        <div class="card-label">03 — Contact</div>
+        <div class="card-title-big">CONTACT</div>
+        <div class="card-desc">Get in touch or view my other profiles and academic information. Let's connect.</div>
+        <div class="card-cta">ENTER ◆</div>
       </a>
     </div>
   </section>
 
   <!-- ══ FOOTER ══ -->
   <footer>
-    <p>&copy; 2025 &mdash; Daryl Alidro &mdash; OOP E-Portfolio</p>
-    <div class="dot"></div>
+    <div class="footer-brand">★ DARYL ALIDRO ★</div>
+    <div class="footer-meta">&copy; 2025 — OOP E-PORTFOLIO — BSIT 2-3</div>
+    <div class="footer-stars">◆ ◆ ◆</div>
   </footer>
 
 </body>
