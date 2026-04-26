@@ -256,32 +256,14 @@
       font-weight: 600;
     }
 
-    /* ── SCREENSHOT PLACEHOLDER ── */
+    /* ── SCREENSHOT BOX ── */
     .screenshot-box {
       width: 100%;
       aspect-ratio: 16/9;
       background: var(--surface2);
       border-bottom: 1px solid var(--border);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.4rem;
-      position: relative;
       overflow: hidden;
-    }
-
-    .screenshot-box::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 10px,
-        rgba(255,255,255,0.01) 10px,
-        rgba(255,255,255,0.01) 20px
-      );
+      position: relative;
     }
 
     .screenshot-box img {
@@ -289,23 +271,6 @@
       height: 100%;
       object-fit: cover;
       display: block;
-    }
-
-    .screenshot-hint {
-      font-family: var(--mono);
-      font-size: 0.65rem;
-      color: var(--muted);
-      text-align: center;
-      line-height: 1.6;
-      padding: 0 1rem;
-      position: relative;
-      z-index: 1;
-    }
-
-    .screenshot-hint .filename {
-      color: var(--accent);
-      display: block;
-      margin-top: 0.3rem;
     }
 
     /* ── PAPER NOTE BOX ── */
@@ -420,27 +385,9 @@
       background: var(--surface2);
       border: 1px dashed var(--border);
       border-radius: 8px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.4rem;
+      overflow: hidden;
       margin-bottom: 1.2rem;
       position: relative;
-      overflow: hidden;
-    }
-
-    .screenshot-wide::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 10px,
-        rgba(255,255,255,0.01) 10px,
-        rgba(255,255,255,0.01) 20px
-      );
     }
 
     .screenshot-wide img {
@@ -540,9 +487,7 @@
 
   <main>
 
-    <!-- ══════════════════════════════ -->
-    <!-- QUIZ                           -->
-    <!-- ══════════════════════════════ -->
+    <!-- ══ QUIZ ══ -->
     <section class="content-section" id="quiz">
       <div class="section-heading">
         <span class="section-tag">Quiz</span>
@@ -557,14 +502,7 @@
         </div>
         <div class="single-card-body">
           <div class="screenshot-wide">
-            <!--
-              TO ADD IMAGE: replace the div below with:
-              <img src="quiz.jpg" alt="Midterm Quiz" />
-            -->
-            <div class="screenshot-hint">
-              📄 Add your quiz screenshot or PDF here
-              <span class="filename">rename your file → quiz.jpg</span>
-            </div>
+            <img src="quiz.jpg" alt="Midterm Quiz" />
           </div>
 
           <div class="field-label">About</div>
@@ -578,9 +516,7 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════ -->
-    <!-- SEATWORKS                      -->
-    <!-- ══════════════════════════════ -->
+    <!-- ══ SEATWORKS ══ -->
     <section class="content-section" id="seatworks">
       <div class="section-heading">
         <span class="section-tag blue">Seatwork</span>
@@ -616,14 +552,7 @@
             <h3>Midterm Seatwork #2</h3>
           </div>
           <div class="screenshot-box">
-            <!--
-              TO ADD IMAGE:
-              <img src="seatwork2.jpg" alt="Seatwork 2" />
-            -->
-            <div class="screenshot-hint">
-              🖼️ Add screenshot
-              <span class="filename">seatwork2.jpg</span>
-            </div>
+            <img src="seatwork2.jpg" alt="Seatwork 2" />
           </div>
           <div class="item-card-body">
             <div class="field-label">Description</div>
@@ -640,14 +569,7 @@
             <h3>Midterm Seatwork #3</h3>
           </div>
           <div class="screenshot-box">
-            <!--
-              TO ADD IMAGE:
-              <img src="seatwork3.jpg" alt="Seatwork 3" />
-            -->
-            <div class="screenshot-hint">
-              🖼️ Add screenshot
-              <span class="filename">seatwork3.jpg</span>
-            </div>
+            <img src="seatwork3.jpg" alt="Seatwork 3" />
           </div>
           <div class="item-card-body">
             <div class="field-label">Description</div>
@@ -660,9 +582,7 @@
       </div>
     </section>
 
-    <!-- ══════════════════════════════ -->
-    <!-- ACTIVITIES                     -->
-    <!-- ══════════════════════════════ -->
+    <!-- ══ ACTIVITIES ══ -->
     <section class="content-section" id="activities">
       <div class="section-heading">
         <span class="section-tag">Activity</span>
@@ -672,17 +592,14 @@
 
       <div class="items-grid">
 
-        <!-- ACTIVITY 1 -->
+        <!-- ACTIVITY 1 — Written/PDF only, no Java -->
         <div class="item-card">
           <div class="item-card-header">
             <span class="item-number">ACT — 01</span>
             <h3>Midterm Activity #1</h3>
           </div>
           <div class="screenshot-box">
-            <div class="screenshot-hint">
-              🖼️ Add screenshot
-              <span class="filename">activity1.jpg</span>
-            </div>
+            <img src="activity1.jpg" alt="Activity 1" />
           </div>
           <div class="item-card-body">
             <div class="field-label">Description</div>
@@ -694,17 +611,14 @@
           </div>
         </div>
 
-        <!-- ACTIVITY 2 -->
+        <!-- ACTIVITY 2 — 3 Java programs, no download -->
         <div class="item-card">
           <div class="item-card-header">
             <span class="item-number">ACT — 02</span>
             <h3>Midterm Activity #2</h3>
           </div>
           <div class="screenshot-box">
-            <div class="screenshot-hint">
-              🖼️ Add screenshot
-              <span class="filename">activity2.jpg</span>
-            </div>
+            <img src="activity2.jpg" alt="Activity 2" />
           </div>
           <div class="item-card-body">
             <div class="field-label">Description</div>
@@ -723,10 +637,7 @@
             <h3>Midterm Activity #3</h3>
           </div>
           <div class="screenshot-box">
-            <div class="screenshot-hint">
-              🖼️ Add screenshot
-              <span class="filename">activity3.jpg</span>
-            </div>
+            <img src="activity3.jpg" alt="Activity 3" />
           </div>
           <div class="item-card-body">
             <div class="field-label">Description</div>
@@ -745,10 +656,7 @@
             <h3>Midterm Activity #4</h3>
           </div>
           <div class="screenshot-box">
-            <div class="screenshot-hint">
-              🖼️ Add screenshot
-              <span class="filename">activity4.jpg</span>
-            </div>
+            <img src="activity4.jpg" alt="Activity 4" />
           </div>
           <div class="item-card-body">
             <div class="field-label">Description</div>
@@ -767,10 +675,7 @@
             <h3>Midterm Activity #5</h3>
           </div>
           <div class="screenshot-box">
-            <div class="screenshot-hint">
-              🖼️ Add screenshot
-              <span class="filename">activity5.jpg</span>
-            </div>
+            <img src="activity5.jpg" alt="Activity 5" />
           </div>
           <div class="item-card-body">
             <div class="field-label">Description</div>
