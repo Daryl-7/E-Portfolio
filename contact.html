@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="https://fav.farm/🖥️" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OOP E-Portfolio | Contact</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0d0d;
+      --surface: #141414;
+      --surface2: #1a1a1a;
+      --border: #222;
+      --accent: #c8f135;
+      --accent2: #3b82f6;
+      --text: #f0f0f0;
+      --muted: #666;
+      --mono: 'Space Mono', monospace;
+      --sans: 'Syne', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(13,13,13,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: var(--accent);
+      transition: width 0.25s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.active { color: var(--accent); }
+    .nav-links a.active::after { width: 100%; }
+
+    /* ── MAIN LAYOUT ── */
+    .contact-wrapper {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    /* ── LEFT PANEL ── */
+    .left-panel {
+      padding: 10rem 4rem 4rem;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .left-panel::before {
+      content: 'HI.';
+      position: absolute;
+      bottom: -2rem;
+      left: -1rem;
+      font-size: 18rem;
+      font-weight: 800;
+      color: rgba(200,241,53,0.03);
+      letter-spacing: -0.05em;
+      pointer-events: none;
+      line-height: 1;
+    }
+
+    .breadcrumb {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.5s 0.1s forwards;
+    }
+
+    .breadcrumb span { color: var(--accent); }
+
+    .left-panel h1 {
+      font-size: clamp(2.5rem, 4vw, 4.5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.5s 0.25s forwards;
+    }
+
+    .left-panel h1 em {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    .left-panel p {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 400px;
+      opacity: 0;
+      animation: fadeUp 0.5s 0.4s forwards;
+    }
+
+    /* ── RIGHT PANEL ── */
+    .right-panel {
+      padding: 10rem 4rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .contact-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      opacity: 0;
+      animation: fadeUp 0.5s 0.3s forwards;
+    }
+
+    /* ── CONTACT CARDS ── */
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.8rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s, transform 0.2s, background 0.2s;
+      opacity: 0;
+      animation: fadeUp 0.5s forwards;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-card:nth-child(2) { animation-delay: 0.4s; }
+    .contact-card:nth-child(3) { animation-delay: 0.55s; }
+
+    .contact-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(200,241,53,0.03);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .contact-card:hover {
+      border-color: #333;
+      transform: translateX(6px);
+    }
+
+    .contact-card:hover::before { opacity: 1; }
+
+    .contact-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .icon-email { background: rgba(200,241,53,0.1); }
+    .icon-fb    { background: rgba(59,130,246,0.15); }
+
+    .contact-info { flex: 1; }
+
+    .contact-type {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .contact-value {
+      font-family: var(--mono);
+      font-size: 0.88rem;
+      color: var(--text);
+      word-break: break-all;
+    }
+
+    .contact-arrow {
+      font-size: 1rem;
+      color: var(--muted);
+      transition: color 0.2s, transform 0.2s;
+      flex-shrink: 0;
+    }
+
+    .contact-card:hover .contact-arrow {
+      color: var(--accent);
+      transform: translate(3px, -3px);
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.5s 0.5s forwards;
+    }
+
+    .divider .line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .divider span {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* ── BACK HOME ── */
+    .back-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
+      opacity: 0;
+      animation: fadeUp 0.5s 0.7s forwards;
+      margin-top: 0.5rem;
+    }
+
+    .back-home:hover { color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer p {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    footer .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .contact-wrapper {
+        grid-template-columns: 1fr;
+      }
+      .left-panel {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding: 8rem 2rem 3rem;
+      }
+      .right-panel {
+        padding: 3rem 2rem 4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ NAV ══ -->
+  <nav>
+    <a href="index.html" class="nav-logo">./e-portfolio</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="midterm.html">Midterm</a></li>
+      <li><a href="final.html">Outputs</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ══ CONTACT LAYOUT ══ -->
+  <div class="contact-wrapper">
+
+    <!-- LEFT -->
+    <div class="left-panel">
+      <p class="breadcrumb">
+        <span>Daryl Alidro</span> &nbsp;/&nbsp; BSIT 2-3 &nbsp;/&nbsp; Contact
+      </p>
+      <h1>Get in <em>Touch.</em></h1>
+      <p>Feel free to reach out via email or connect with me on Facebook. I'm open to questions, feedback, or just a quick hello.</p>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right-panel">
+
+      <p class="contact-label">// Reach me at</p>
+
+      <!-- EMAIL -->
+      <a href="mailto:alidrodaryl8@gmail.com" class="contact-card">
+        <div class="contact-icon icon-email">✉️</div>
+        <div class="contact-info">
+          <div class="contact-type">Email</div>
+          <div class="contact-value">alidrodaryl8@gmail.com</div>
+        </div>
+        <span class="contact-arrow">↗</span>
+      </a>
+
+      <!-- FACEBOOK -->
+      <a href="https://www.facebook.com/Ryll.39" target="_blank" rel="noopener" class="contact-card">
+        <div class="contact-icon icon-fb">👤</div>
+        <div class="contact-info">
+          <div class="contact-type">Facebook</div>
+          <div class="contact-value">facebook.com/Ryll.39</div>
+        </div>
+        <span class="contact-arrow">↗</span>
+      </a>
+
+      <div class="divider">
+        <div class="line"></div>
+        <span>or</span>
+        <div class="line"></div>
+      </div>
+
+      <a href="index.html" class="back-home">← Back to Home</a>
+
+    </div>
+  </div>
+
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <p>&copy; 2025 &mdash; Daryl Alidro &mdash; OOP E-Portfolio</p>
+    <div class="dot"></div>
+  </footer>
+
+</body>
+</html>

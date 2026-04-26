@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="https://fav.farm/🖥️" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OOP E-Portfolio | Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0d0d;
+      --surface: #141414;
+      --border: #222;
+      --accent: #c8f135;
+      --accent2: #3b82f6;
+      --text: #f0f0f0;
+      --muted: #666;
+      --mono: 'Space Mono', monospace;
+      --sans: 'Syne', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(13,13,13,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: var(--accent);
+      transition: width 0.25s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.active { color: var(--accent); }
+    .nav-links a.active::after { width: 100%; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 3rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,241,53,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-tag {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.2s forwards;
+    }
+
+    .hero-name {
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.35s forwards;
+    }
+
+    .hero-name span {
+      color: var(--accent);
+      display: block;
+    }
+
+    .hero-sub {
+      font-family: var(--mono);
+      font-size: 0.9rem;
+      color: var(--muted);
+      margin-bottom: 0.5rem;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.5s forwards;
+    }
+
+    .hero-section-label {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.6s forwards;
+    }
+
+    .hero-intro-box {
+      max-width: 680px;
+      border-left: 2px solid var(--accent);
+      padding: 1.2rem 1.5rem;
+      background: rgba(200,241,53,0.04);
+      border-radius: 0 8px 8px 0;
+      opacity: 0;
+      animation: fadeUp 0.6s 0.75s forwards;
+    }
+
+    .hero-intro-box p {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      color: #aaa;
+      line-height: 1.8;
+    }
+
+    /* ── PROFILE PHOTO SECTION ── */
+    .photo-section {
+      padding: 5rem 3rem;
+      display: flex;
+      align-items: center;
+      gap: 4rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .photo-frame {
+      flex-shrink: 0;
+      width: 220px;
+      height: 220px;
+      border-radius: 12px;
+      border: 2px solid var(--border);
+      overflow: hidden;
+      position: relative;
+      background: var(--surface);
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .photo-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      text-align: center;
+      padding: 1rem;
+    }
+
+    .photo-placeholder .icon {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .photo-info { flex: 1; }
+
+    .photo-info h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .info-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.2rem;
+    }
+
+    .info-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+    }
+
+    .info-value {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--text);
+    }
+
+    /* ── CONTENTS PREVIEW ── */
+    .contents {
+      padding: 5rem 3rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.5rem;
+      font-weight: 800;
+    }
+
+    .section-header .line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.8rem;
+      text-decoration: none;
+      color: var(--text);
+      transition: border-color 0.2s, transform 0.2s;
+      display: block;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+
+    .card:hover { border-color: #333; transform: translateY(-3px); }
+    .card:hover::before { transform: scaleX(1); }
+
+    .card-num {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      letter-spacing: 0.1em;
+    }
+
+    .card h3 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.6rem;
+    }
+
+    .card p {
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .card-arrow {
+      position: absolute;
+      bottom: 1.5rem; right: 1.5rem;
+      font-size: 1rem;
+      color: var(--muted);
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .card:hover .card-arrow { color: var(--accent); transform: translate(3px, -3px); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer p {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    footer .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ NAV ══ -->
+  <nav>
+    <a href="index.html" class="nav-logo">./e-portfolio</a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="midterm.html">Midterm</a></li>
+      <li><a href="final.html">Outputs</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ══ HERO ══ -->
+  <section class="hero">
+    <p class="hero-tag">// OOP E-Portfolio &mdash; Midterm</p>
+    <h1 class="hero-name">
+      Daryl<span>Alidro.</span>
+    </h1>
+    <p class="hero-sub">Course: Object-Oriented Programming</p>
+    <p class="hero-section-label">Section: BSIT 2-3</p>
+    <div class="hero-intro-box">
+      <p>
+        This e-portfolio presents my Midterm Project in Object-Oriented
+        Programming using Java. It includes quizzes, activities, and exams
+        that demonstrate my understanding of OOP concepts such as classes,
+        objects, inheritance, and encapsulation.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══ PHOTO + INFO ══ -->
+  <section class="photo-section">
+    <div class="photo-frame">
+      <!--
+        TO ADD YOUR PHOTO:
+        1. Save your photo as "profile.jpg" in the same folder as this file
+        2. Delete the div.photo-placeholder below
+        3. Uncomment the img tag below
+      -->
+        <img src="profile.jpg" alt="Profile Photo" />
+        <div class="icon">🖼️</div>
+        <div>Save your photo as<br/><strong>profile.jpg</strong><br/>in the same folder</div>
+    </div>
+
+    <div class="photo-info">
+      <h2>About Me</h2>
+      <div class="info-grid">
+        <div class="info-item">
+          <div class="info-label">Full Name</div>
+          <div class="info-value">Daryl Alidro</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Course</div>
+          <div class="info-value">Object-Oriented Programming</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Section</div>
+          <div class="info-value">BSIT 2-3</div>
+        </div>
+        <div class="info-item">
+          <div class="info-label">Language</div>
+          <div class="info-value">Java</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PAGE CARDS ══ -->
+  <section class="contents">
+    <div class="section-header">
+      <h2>Portfolio Contents</h2>
+      <div class="line"></div>
+    </div>
+    <div class="cards">
+      <a href="midterm.html" class="card">
+        <div class="card-num">01 &mdash; MIDTERM</div>
+        <h3>Midterm Outputs</h3>
+        <p>Quizzes, seatwork, activities (ATM, decision structures, methods), and midterm exam with reflections.</p>
+        <span class="card-arrow">↗</span>
+      </a>
+      <a href="final.html" class="card">
+        <div class="card-num">02 &mdash; OUTPUTS</div>
+        <h3>All Outputs</h3>
+        <p>A downloadable collection of all my OOP outputs — source files, screenshots, and documents in one place.</p>
+        <span class="card-arrow">↗</span>
+      </a>
+      <a href="contact.html" class="card">
+        <div class="card-num">03 &mdash; CONTACT</div>
+        <h3>Contact</h3>
+        <p>Get in touch or view my other profiles and academic information.</p>
+        <span class="card-arrow">↗</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <p>&copy; 2025 &mdash; Daryl Alidro &mdash; OOP E-Portfolio</p>
+    <div class="dot"></div>
+  </footer>
+
+</body>
+</html>

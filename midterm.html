@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="https://fav.farm/🖥️" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OOP E-Portfolio | Midterm</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0d0d;
+      --surface: #141414;
+      --surface2: #1a1a1a;
+      --border: #222;
+      --accent: #c8f135;
+      --accent2: #3b82f6;
+      --text: #f0f0f0;
+      --muted: #666;
+      --mono: 'Space Mono', monospace;
+      --sans: 'Syne', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--sans);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.2rem 3rem;
+      background: rgba(13,13,13,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: var(--accent);
+      transition: width 0.25s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-links a.active { color: var(--accent); }
+    .nav-links a.active::after { width: 100%; }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 8rem 3rem 4rem;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-header::before {
+      content: 'MIDTERM';
+      position: absolute;
+      top: 50%; right: -1rem;
+      transform: translateY(-50%);
+      font-size: 12rem;
+      font-weight: 800;
+      color: rgba(200,241,53,0.03);
+      letter-spacing: -0.05em;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    .breadcrumb {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.5s 0.1s forwards;
+    }
+
+    .breadcrumb span { color: var(--accent); }
+
+    .page-header h1 {
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.5s 0.25s forwards;
+    }
+
+    .page-header h1 em {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    .page-header p {
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      color: var(--muted);
+      max-width: 560px;
+      line-height: 1.7;
+      opacity: 0;
+      animation: fadeUp 0.5s 0.4s forwards;
+    }
+
+    /* ── JUMP LINKS ── */
+    .jump-nav {
+      padding: 1.5rem 3rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      background: var(--surface);
+    }
+
+    .jump-link {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--muted);
+      text-decoration: none;
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: 0.35rem 0.9rem;
+      letter-spacing: 0.06em;
+      transition: all 0.2s;
+    }
+
+    .jump-link:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+      background: rgba(200,241,53,0.05);
+    }
+
+    /* ── MAIN CONTENT ── */
+    main { padding: 4rem 3rem; }
+
+    /* ── SECTION BLOCK ── */
+    .content-section {
+      margin-bottom: 5rem;
+    }
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-tag {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--bg);
+      background: var(--accent);
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      letter-spacing: 0.08em;
+      font-weight: 700;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+
+    .section-tag.blue {
+      background: var(--accent2);
+    }
+
+    .section-heading h2 {
+      font-size: 1.4rem;
+      font-weight: 800;
+    }
+
+    .section-heading .line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── ITEM CARDS ── */
+    .items-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.2rem;
+    }
+
+    .item-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .item-card:hover {
+      border-color: #333;
+      transform: translateY(-2px);
+    }
+
+    .item-card-header {
+      padding: 1.2rem 1.4rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .item-number {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+    }
+
+    .item-card-header h3 {
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    /* ── SCREENSHOT PLACEHOLDER ── */
+    .screenshot-box {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .screenshot-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255,255,255,0.01) 10px,
+        rgba(255,255,255,0.01) 20px
+      );
+    }
+
+    .screenshot-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .screenshot-hint {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--muted);
+      text-align: center;
+      line-height: 1.6;
+      padding: 0 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .screenshot-hint .filename {
+      color: var(--accent);
+      display: block;
+      margin-top: 0.3rem;
+    }
+
+    /* ── PAPER NOTE BOX ── */
+    .paper-note-box {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .paper-note-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255,255,255,0.01) 10px,
+        rgba(255,255,255,0.01) 20px
+      );
+    }
+
+    .paper-note-icon {
+      font-size: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .paper-note-label {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      position: relative;
+      z-index: 1;
+    }
+
+    .paper-note-sub {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--muted);
+      text-align: center;
+      padding: 0 1.5rem;
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── ITEM BODY ── */
+    .item-card-body {
+      padding: 1.2rem 1.4rem;
+    }
+
+    .field-label {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.3rem;
+      margin-top: 0.9rem;
+    }
+
+    .field-label:first-child { margin-top: 0; }
+
+    .field-value {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.7;
+      font-style: italic;
+    }
+
+    /* ── QUIZ SINGLE CARD ── */
+    .single-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .single-card-header {
+      padding: 1.4rem 1.8rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .single-card-header h3 {
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .single-card-body {
+      padding: 1.8rem;
+    }
+
+    /* ── SCREENSHOT WIDE ── */
+    .screenshot-wide {
+      width: 100%;
+      aspect-ratio: 16/7;
+      background: var(--surface2);
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      margin-bottom: 1.2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .screenshot-wide::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255,255,255,0.01) 10px,
+        rgba(255,255,255,0.01) 20px
+      );
+    }
+
+    .screenshot-wide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    /* ── REFLECTION BOX ── */
+    .reflection-box {
+      border-left: 2px solid var(--accent2);
+      padding: 1rem 1.4rem;
+      background: rgba(59,130,246,0.05);
+      border-radius: 0 8px 8px 0;
+      margin-top: 1rem;
+    }
+
+    .reflection-box .r-label {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--accent2);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 0.4rem;
+    }
+
+    .reflection-box p {
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.8;
+      font-style: italic;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer p {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+
+    footer .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ NAV ══ -->
+  <nav>
+    <a href="index.html" class="nav-logo">./e-portfolio</a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="midterm.html" class="active">Midterm</a></li>
+      <li><a href="final.html">Outputs</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ══ PAGE HEADER ══ -->
+  <header class="page-header">
+    <p class="breadcrumb">
+      <span>Daryl Alidro</span> &nbsp;/&nbsp; BSIT 2-3 &nbsp;/&nbsp; Midterm
+    </p>
+    <h1>Midterm <em>Outputs.</em></h1>
+    <p>A collection of my midterm quizzes, seatworks, and activities in Object-Oriented Programming using Java.</p>
+  </header>
+
+  <!-- ══ JUMP NAV ══ -->
+  <div class="jump-nav">
+    <a href="#quiz" class="jump-link">Quiz</a>
+    <a href="#seatworks" class="jump-link">Seatworks</a>
+    <a href="#activities" class="jump-link">Activities</a>
+  </div>
+
+  <main>
+
+    <!-- ══════════════════════════════ -->
+    <!-- QUIZ                           -->
+    <!-- ══════════════════════════════ -->
+    <section class="content-section" id="quiz">
+      <div class="section-heading">
+        <span class="section-tag">Quiz</span>
+        <h2>Midterm Quiz</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="single-card">
+        <div class="single-card-header">
+          <span class="item-number">01</span>
+          <h3>Midterm Quiz</h3>
+        </div>
+        <div class="single-card-body">
+          <div class="screenshot-wide">
+            <!--
+              TO ADD IMAGE: replace the div below with:
+              <img src="quiz.jpg" alt="Midterm Quiz" />
+            -->
+            <div class="screenshot-hint">
+              📄 Add your quiz screenshot or PDF here
+              <span class="filename">rename your file → quiz.jpg</span>
+            </div>
+          </div>
+
+          <div class="field-label">About</div>
+          <div class="field-value">The questions covered the basic concepts of OOP as well as Java programming. I was able to get 40 out of 45 items correct.</div>
+
+          <div class="reflection-box">
+            <div class="r-label">// Reflection</div>
+            <p>A great way to measure what I have learned in this course. I am pretty satisfied with the results.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════ -->
+    <!-- SEATWORKS                      -->
+    <!-- ══════════════════════════════ -->
+    <section class="content-section" id="seatworks">
+      <div class="section-heading">
+        <span class="section-tag blue">Seatwork</span>
+        <h2>Midterm Seatworks</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="items-grid">
+
+        <!-- SEATWORK 1 -->
+        <div class="item-card">
+          <div class="item-card-header">
+            <span class="item-number">SW — 01</span>
+            <h3>Midterm Seatwork #1</h3>
+          </div>
+          <div class="paper-note-box">
+            <div class="paper-note-icon">📝</div>
+            <div class="paper-note-label">Paper-based Output</div>
+            <div class="paper-note-sub">This output was submitted on paper and was not returned. No digital copy available.</div>
+          </div>
+          <div class="item-card-body">
+            <div class="field-label">Description</div>
+            <div class="field-value">In this activity we were given a task about unary operators. This was written on a piece of paper and was not returned.</div>
+            <div class="field-label">What I Learned</div>
+            <div class="field-value">Overall I did good in this activity with just minimal errors because it's kinda confusing at first.</div>
+          </div>
+        </div>
+
+        <!-- SEATWORK 2 -->
+        <div class="item-card">
+          <div class="item-card-header">
+            <span class="item-number">SW — 02</span>
+            <h3>Midterm Seatwork #2</h3>
+          </div>
+          <div class="screenshot-box">
+            <!--
+              TO ADD IMAGE:
+              <img src="seatwork2.jpg" alt="Seatwork 2" />
+            -->
+            <div class="screenshot-hint">
+              🖼️ Add screenshot
+              <span class="filename">seatwork2.jpg</span>
+            </div>
+          </div>
+          <div class="item-card-body">
+            <div class="field-label">Description</div>
+            <div class="field-value">A Java program that simulates a digital wallet system with transaction tracking.</div>
+            <div class="field-label">What I Learned</div>
+            <div class="field-value">I was able to complete this perfectly with correct methods, validations, and a do-while loop that keeps the program running until the user chooses to exit.</div>
+          </div>
+        </div>
+
+        <!-- SEATWORK 3 -->
+        <div class="item-card">
+          <div class="item-card-header">
+            <span class="item-number">SW — 03</span>
+            <h3>Midterm Seatwork #3</h3>
+          </div>
+          <div class="screenshot-box">
+            <!--
+              TO ADD IMAGE:
+              <img src="seatwork3.jpg" alt="Seatwork 3" />
+            -->
+            <div class="screenshot-hint">
+              🖼️ Add screenshot
+              <span class="filename">seatwork3.jpg</span>
+            </div>
+          </div>
+          <div class="item-card-body">
+            <div class="field-label">Description</div>
+            <div class="field-value">A simple Java program for a student age analyzer, using the Scanner class to accept user input.</div>
+            <div class="field-label">What I Learned</div>
+            <div class="field-value">I kept it simple and direct. Through this seatwork, I feel like I have pretty much mastered how to use the Scanner class in Java.</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ══════════════════════════════ -->
+    <!-- ACTIVITIES                     -->
+    <!-- ══════════════════════════════ -->
+    <section class="content-section" id="activities">
+      <div class="section-heading">
+        <span class="section-tag">Activity</span>
+        <h2>Midterm Activities</h2>
+        <div class="line"></div>
+      </div>
+
+      <div class="items-grid">
+
+        <!-- ACTIVITY 1 -->
+        <div class="item-card">
+          <div class="item-card-header">
+            <span class="item-number">ACT — 01</span>
+            <h3>Midterm Activity #1</h3>
+          </div>
+          <div class="screenshot-box">
+            <div class="screenshot-hint">
+              🖼️ Add screenshot
+              <span class="filename">activity1.jpg</span>
+            </div>
+          </div>
+          <div class="item-card-body">
+            <div class="field-label">Description</div>
+            <div class="field-value">This activity focused on variables. We were tasked to analyze a program and identify the variable name, data type, variable type, and where it is stored.</div>
+            <div class="field-label">OOP Concepts Applied</div>
+            <div class="field-value">Variable declaration, data types, memory storage (stack vs. heap)</div>
+            <div class="field-label">What I Learned</div>
+            <div class="field-value">I gained a better understanding of variable behavior — particularly where variables are stored and how they operate in memory.</div>
+          </div>
+        </div>
+
+        <!-- ACTIVITY 2 -->
+        <div class="item-card">
+          <div class="item-card-header">
+            <span class="item-number">ACT — 02</span>
+            <h3>Midterm Activity #2</h3>
+          </div>
+          <div class="screenshot-box">
+            <div class="screenshot-hint">
+              🖼️ Add screenshot
+              <span class="filename">activity2.jpg</span>
+            </div>
+          </div>
+          <div class="item-card-body">
+            <div class="field-label">Description</div>
+            <div class="field-value">We were introduced to the different Java operators and tasked to create a Java program that uses all of the operators discussed in class.</div>
+            <div class="field-label">OOP Concepts Applied</div>
+            <div class="field-value">Arithmetic, relational, logical, and assignment operators</div>
+            <div class="field-label">What I Learned</div>
+            <div class="field-value">I was able to apply all the operators discussed, which helped me gain a stronger mastery of how different operators work in Java.</div>
+          </div>
+        </div>
+
+        <!-- ACTIVITY 3 -->
+        <div class="item-card">
+          <div class="item-card-header">
+            <span class="item-number">ACT — 03</span>
+            <h3>Midterm Activity #3</h3>
+          </div>
+          <div class="screenshot-box">
+            <div class="screenshot-hint">
+              🖼️ Add screenshot
+              <span class="filename">activity3.jpg</span>
+            </div>
+          </div>
+          <div class="item-card-body">
+            <div class="field-label">Description</div>
+            <div class="field-value">A basic ATM system simulation using the Scanner class for user input. The program includes Withdraw, Deposit, and Check Balance methods.</div>
+            <div class="field-label">OOP Concepts Applied</div>
+            <div class="field-value">Methods, Scanner class, control flow, user input handling</div>
+            <div class="field-label">What I Learned</div>
+            <div class="field-value">I was able to complete this perfectly since I had prior experience with a similar project. This activity was a piece of cake for me.</div>
+          </div>
+        </div>
+
+        <!-- ACTIVITY 4 -->
+        <div class="item-card">
+          <div class="item-card-header">
+            <span class="item-number">ACT — 04</span>
+            <h3>Midterm Activity #4</h3>
+          </div>
+          <div class="screenshot-box">
+            <div class="screenshot-hint">
+              🖼️ Add screenshot
+              <span class="filename">activity4.jpg</span>
+            </div>
+          </div>
+          <div class="item-card-body">
+            <div class="field-label">Description</div>
+            <div class="field-value">An Enrollment Assessment System using the Scanner class for user input and a switch-case structure to validate and determine whether a student has passed or failed.</div>
+            <div class="field-label">OOP Concepts Applied</div>
+            <div class="field-value">Switch-case, Scanner class, input validation, conditional logic</div>
+            <div class="field-label">What I Learned</div>
+            <div class="field-value">I was a bit confused at first due to the many conditions that needed to be handled, but I pushed through and was able to produce a correct, working program.</div>
+          </div>
+        </div>
+
+        <!-- ACTIVITY 5 -->
+        <div class="item-card">
+          <div class="item-card-header">
+            <span class="item-number">ACT — 05</span>
+            <h3>Midterm Activity #5</h3>
+          </div>
+          <div class="screenshot-box">
+            <div class="screenshot-hint">
+              🖼️ Add screenshot
+              <span class="filename">activity5.jpg</span>
+            </div>
+          </div>
+          <div class="item-card-body">
+            <div class="field-label">Description</div>
+            <div class="field-value">An Expense Tracker program using void and non-void methods to implement the core features of the application.</div>
+            <div class="field-label">OOP Concepts Applied</div>
+            <div class="field-value">Void and non-void methods, return values, modular programming</div>
+            <div class="field-label">What I Learned</div>
+            <div class="field-value">This is my favorite activity because I found it easy and was able to showcase what I know about methods. I finished it quickly and felt confident throughout.</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <p>&copy; 2025 &mdash; Daryl Alidro &mdash; OOP E-Portfolio</p>
+    <div class="dot"></div>
+  </footer>
+
+</body>
+</html>
